@@ -249,114 +249,114 @@ include("futures.jl")
 
 #= REQUESTS =#
 
-include("requests/create_window.jl")
-include("requests/change_window_attributes.jl")
-include("requests/get_window_attributes.jl")
-include("requests/destroy_window.jl")
-include("requests/destroy_subwindows.jl")
-include("requests/change_save_set.jl")
-include("requests/reparent_window.jl")
-include("requests/map_window.jl")
-include("requests/map_subwindows.jl")
-include("requests/unmap_window.jl")
-include("requests/unmap_subwindows.jl")
-include("requests/configure_window.jl")
-include("requests/circulate_windows.jl")
-include("requests/get_geometry.jl")
-include("requests/query_tree.jl")
-include("requests/intern_atom.jl")
-include("requests/get_atom_name.jl")
-include("requests/change_property.jl")
-include("requests/delete_property.jl")
-include("requests/get_property.jl")
-include("requests/list_properties.jl")
-include("requests/set_selection_owner.jl")
-include("requests/get_selection_owner.jl")
-include("requests/convert_selection.jl")
+include("requests/create_window.jl");              export create_window
+include("requests/change_window_attributes.jl");   export change_window_attributes
+include("requests/get_window_attributes.jl");      export get_window_attributes
+include("requests/destroy_window.jl");             export destroy_window
+include("requests/destroy_subwindows.jl");         export destroy_subwindows
+include("requests/change_save_set.jl");            export change_save_set
+include("requests/reparent_window.jl");            export reparent_window
+include("requests/map_window.jl");                 export map_window
+include("requests/map_subwindows.jl");             export map_subwindows
+include("requests/unmap_window.jl");               export unmap_window
+include("requests/unmap_subwindows.jl");           export unmap_subwindows
+include("requests/configure_window.jl");           export configure_window
+include("requests/circulate_windows.jl");          export circulate_windows
+include("requests/get_geometry.jl");               export get_geometry
+include("requests/query_tree.jl");                 export query_tree
+include("requests/intern_atom.jl");                export intern_atom
+include("requests/get_atom_name.jl");              export get_atom_name
+include("requests/change_property.jl");            export change_property
+include("requests/delete_property.jl");            export delete_property
+include("requests/get_property.jl");               export get_property
+include("requests/list_properties.jl");            export list_properties
+include("requests/set_selection_owner.jl");        export set_selection_owner
+include("requests/get_selection_owner.jl");        export get_selection_owner
+include("requests/convert_selection.jl");          export convert_selection
 # TODO: send_event <- need to abstract events into sth -- all events are 32byte but the structs arent
-include("requests/grab_pointer.jl")
-include("requests/ungrab_pointer.jl")
-include("requests/grab_button.jl")
-include("requests/ungrab_button.jl")
-include("requests/change_active_pointer_grab.jl")
-include("requests/grab_keyboard.jl")
-include("requests/ungrab_keyboard.jl")
-include("requests/grab_key.jl")
-include("requests/ungrab_key.jl")
-include("requests/allow_events.jl")
-include("requests/grab_server.jl")
-include("requests/ungrab_server.jl")
-include("requests/query_pointer.jl")
-include("requests/get_motion_events.jl")
-include("requests/translate_coordinates.jl")
-include("requests/warp_pointer.jl")
-include("requests/set_input_focus.jl")
-include("requests/get_input_focus.jl")
-include("requests/query_keymap.jl")
-include("requests/open_font.jl")
-include("requests/close_font.jl")
-include("requests/query_font.jl")
-include("requests/query_text_extents.jl")
-include("requests/list_fonts.jl")
-include("requests/get_font_path.jl")
-include("requests/set_font_path.jl")
-include("requests/create_pixmap.jl")
-include("requests/free_pixmap.jl")
-include("requests/create_gc.jl")
-include("requests/change_gc.jl")
-include("requests/set_dashes.jl")
-include("requests/free_gc.jl")
-include("requests/clear_area.jl")
-include("requests/copy_area.jl")
-include("requests/copy_plane.jl")
-include("requests/poly_point.jl")
-include("requests/poly_line.jl")
-include("requests/poly_segment.jl")
-include("requests/poly_rectangle.jl")
-include("requests/poly_arc.jl")
-include("requests/fill_poly.jl")
-include("requests/poly_fill_rectangle.jl")
-include("requests/poly_fill_arc.jl")
+include("requests/grab_pointer.jl");               export grab_pointer
+include("requests/ungrab_pointer.jl");             export ungrab_pointer
+include("requests/grab_button.jl");                export grab_button
+include("requests/ungrab_button.jl");              export ungrab_button
+include("requests/change_active_pointer_grab.jl"); export change_active_pointer_grab
+include("requests/grab_keyboard.jl");              export grab_keyboard
+include("requests/ungrab_keyboard.jl");            export ungrab_keyboard
+include("requests/grab_key.jl");                   export grab_key
+include("requests/ungrab_key.jl");                 export ungrab_key
+include("requests/allow_events.jl");               export allow_events
+include("requests/grab_server.jl");                export grab_server
+include("requests/ungrab_server.jl");              export ungrab_server
+include("requests/query_pointer.jl");              export query_pointer
+include("requests/get_motion_events.jl");          export get_motion_events
+include("requests/translate_coordinates.jl");      export translate_coordinates
+include("requests/warp_pointer.jl");               export warp_pointer
+include("requests/set_input_focus.jl");            export set_input_focus
+include("requests/get_input_focus.jl");            export get_input_focus
+include("requests/query_keymap.jl");               export query_keymap
+include("requests/open_font.jl");                  export open_font
+include("requests/close_font.jl");                 export close_font
+include("requests/query_font.jl");                 export query_font
+include("requests/query_text_extents.jl");         export query_text_extents
+include("requests/list_fonts.jl");                 export list_fonts
+include("requests/get_font_path.jl");              export get_font_path
+include("requests/set_font_path.jl");              export set_font_path
+include("requests/create_pixmap.jl");              export create_pixmap
+include("requests/free_pixmap.jl");                export free_pixmap
+include("requests/create_gc.jl");                  export create_gc
+include("requests/change_gc.jl");                  export change_gc
+include("requests/set_dashes.jl");                 export set_dashes
+include("requests/free_gc.jl");                    export free_gc
+include("requests/clear_area.jl");                 export clear_area
+include("requests/copy_area.jl");                  export copy_area
+include("requests/copy_plane.jl");                 export copy_plane
+include("requests/poly_point.jl");                 export poly_point
+include("requests/poly_line.jl");                  export poly_line
+include("requests/poly_segment.jl");               export poly_segment
+include("requests/poly_rectangle.jl");             export poly_rectangle
+include("requests/poly_arc.jl");                   export poly_arc
+include("requests/fill_poly.jl");                  export fill_poly
+include("requests/poly_fill_rectangle.jl");        export poly_fill_rectangle
+include("requests/poly_fill_arc.jl");              export poly_fill_arc
 # TODO: put_image through image_text_16
-include("requests/create_colormap.jl")
-include("requests/free_colormap.jl")
-include("requests/copy_colormap_and_free.jl")
-include("requests/install_colormap.jl")
-include("requests/uninstall_colormap.jl")
-include("requests/list_installed_colormaps.jl")
-include("requests/alloc_color.jl")
-include("requests/alloc_named_color.jl")
+include("requests/create_colormap.jl");            export create_colormap
+include("requests/free_colormap.jl");              export free_colormap
+include("requests/copy_colormap_and_free.jl");     export copy_colormap_and_free
+include("requests/install_colormap.jl");           export install_colormap
+include("requests/uninstall_colormap.jl");         export uninstall_colormap
+include("requests/list_installed_colormaps.jl");   export list_installed_colormaps
+include("requests/alloc_color.jl");                export alloc_color
+include("requests/alloc_named_color.jl");          export alloc_named_color
 # TODO: alloc_color_{cells,planes}
-include("requests/free_colors.jl")
-include("requests/store_colors.jl")
-include("requests/store_named_color.jl")
-include("requests/query_colors.jl")
-include("requests/lookup_color.jl")
-include("requests/create_cursor.jl")
-include("requests/create_glyph_cursor.jl")
-include("requests/free_cursor.jl")
-include("requests/recolor_cursor.jl")
-include("requests/query_best_size.jl")
-include("requests/query_extension.jl")
-include("requests/list_extensions.jl")
-include("requests/change_keyboard_mapping.jl")
-include("requests/get_keyboard_mapping.jl")
-include("requests/change_keyboard_control.jl")
-include("requests/get_keyboard_control.jl")
-include("requests/bell.jl")
-include("requests/change_pointer_control.jl")
-include("requests/get_pointer_control.jl")
-include("requests/set_screen_saver.jl")
-include("requests/get_screen_saver.jl")
+include("requests/free_colors.jl");                export free_colors
+include("requests/store_colors.jl");               export store_colors
+include("requests/store_named_color.jl");          export store_named_color
+include("requests/query_colors.jl");               export query_colors
+include("requests/lookup_color.jl");               export lookup_color
+include("requests/create_cursor.jl");              export create_cursor
+include("requests/create_glyph_cursor.jl");        export create_glyph_cursor
+include("requests/free_cursor.jl");                export free_cursor
+include("requests/recolor_cursor.jl");             export recolor_cursor
+include("requests/query_best_size.jl");            export query_best_size
+include("requests/query_extension.jl");            export query_extension
+include("requests/list_extensions.jl");            export list_extensions
+include("requests/change_keyboard_mapping.jl");    export change_keyboard_mapping
+include("requests/get_keyboard_mapping.jl");       export get_keyboard_mapping
+include("requests/change_keyboard_control.jl");    export change_keyboard_control
+include("requests/get_keyboard_control.jl");       export get_keyboard_control
+include("requests/bell.jl");                       export bell
+include("requests/change_pointer_control.jl");     export change_pointer_control
+include("requests/get_pointer_control.jl");        export get_pointer_control
+include("requests/set_screen_saver.jl");           export set_screen_saver
+include("requests/get_screen_saver.jl");           export get_screen_saver
 # TODO: Hosts / Access control requests
-include("requests/set_close_down_mode.jl")
-include("requests/kill_client.jl")
-include("requests/rotate_properties.jl")
-include("requests/force_screen_saver.jl")
-include("requests/set_pointer_mapping.jl")
-include("requests/get_pointer_mapping.jl")
-include("requests/set_modifier_mapping.jl")
-include("requests/get_modifier_mapping.jl")
-include("requests/no_operation.jl")
+include("requests/set_close_down_mode.jl");        export set_close_down_mode
+include("requests/kill_client.jl");                export kill_client
+include("requests/rotate_properties.jl");          export rotate_properties
+include("requests/force_screen_saver.jl");         export force_screen_saver
+include("requests/set_pointer_mapping.jl");        export set_pointer_mapping
+include("requests/get_pointer_mapping.jl");        export get_pointer_mapping
+include("requests/set_modifier_mapping.jl");       export set_modifier_mapping
+include("requests/get_modifier_mapping.jl");       export get_modifier_mapping
+include("requests/no_operation.jl");               export no_operation
 
 end # module
