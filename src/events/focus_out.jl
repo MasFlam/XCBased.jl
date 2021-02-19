@@ -14,3 +14,14 @@ function XCBFocusOutEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 		ev.mode
 	)
 end
+
+function libxcb_event(ev:: XCBFocusOutEvent):: LibXCB.xcb_focus_out_event_t
+	LibXCB.xcb_focus_out_event_t(
+		LibXCB.XCB_FOCUS_OUT,
+		ev.detail,
+		ev.sequence,
+		ev.event,
+		ev.mode,
+		(0, 0, 0) # pad
+	)
+end

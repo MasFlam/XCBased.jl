@@ -38,7 +38,7 @@ function xcb_disconnect(conn:: XCBConnection)
 	nothing
 end
 
-# TODO: Connection errors
+# TODO: Maybe create separate Exception types?
 struct XCBConnectionError <: Exception
 	type:: Cint
 end
@@ -69,6 +69,14 @@ export generate_id
 
 function generate_id(conn:: XCBConnection):: UInt32
 	LibXCB.xcb_generate_id(conn.handle)
+end
+
+function xcb_flush(conn:: XCBConnection):: Bool
+	LibXCB.xcb_flush(conn.handle) == 1
+end
+
+function get_maximum_request_length(conn:: XCBConnection):: UInt32
+	LibXCB.get_maximum_request_length(conn.handle)
 end
 
 
@@ -110,6 +118,7 @@ export XCBEvent, sequence, wait_for_event, poll_for_event
 abstract type XCBEvent end
 
 sequence(e:: XCBEvent):: UInt16 = e.sequence
+libxcb_event(::XCBEvent) = error("unimplemented")
 
 include("events/key_press.jl");         export XCBKeyPressEvent
 include("events/key_release.jl");       export XCBKeyReleaseEvent
@@ -273,7 +282,7 @@ include("requests/list_properties.jl");            export list_properties
 include("requests/set_selection_owner.jl");        export set_selection_owner
 include("requests/get_selection_owner.jl");        export get_selection_owner
 include("requests/convert_selection.jl");          export convert_selection
-# TODO: send_event <- need to abstract events into sth -- all events are 32byte but the structs arent
+include("requests/send_event.jl");                 export send_event
 include("requests/grab_pointer.jl");               export grab_pointer
 include("requests/ungrab_pointer.jl");             export ungrab_pointer
 include("requests/grab_button.jl");                export grab_button

@@ -24,3 +24,20 @@ function XCBGraphicsExposureEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 		ev.major_opcode
 	)
 end
+
+function libxcb_event(ev:: XCBGraphicsExposureEvent):: LibXCB.xcb_graphics_exposure_event_t
+	LibXCB.xcb_graphics_exposure_event_t(
+		LibXCB.XCB_GRAPHICS_EXPOSURE,
+		0, # pad
+		ev.sequence,
+		ev.drawable,
+		ev.x,
+		ev.y,
+		ev.width,
+		ev.height,
+		ev.minor_opcode,
+		ev.count,
+		ev.major_opcode,
+		(0, 0, 0) # pad
+	)
+end

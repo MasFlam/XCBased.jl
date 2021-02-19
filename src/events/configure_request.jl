@@ -1,9 +1,9 @@
 struct XCBConfigureRequestEvent <: XCBEvent
 	sequence:: UInt16
 	stack_mode:: UInt8
-	parent:: LibXCb.xcb_window_t
-	window:: LibXCb.xcb_window_t
-	sibling:: LibXCb.xcb_window_t
+	parent:: LibXCB.xcb_window_t
+	window:: LibXCB.xcb_window_t
+	sibling:: LibXCB.xcb_window_t
 	x:: Int16
 	y:: Int16
 	width:: UInt16
@@ -26,5 +26,22 @@ function XCBConfigureRequestEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 		ev.height,
 		ev.border_width,
 		ev.value_mask,
+	)
+end
+
+function libxcb_event(ev:: XCBConfigureRequestEvent):: LibXCB.xcb_configure_request_event_t
+	LibXCB.xcb_configure_request_event_t(
+		LibXCB.XCB_CONFIGURE_REQUEST,
+		ev.stack_mode,
+		ev.sequence,
+		ev.parent,
+		ev.window,
+		ev.sibling,
+		ev.x,
+		ev.y,
+		ev.width,
+		ev.height,
+		ev.border_width,
+		ev.value_mask
 	)
 end

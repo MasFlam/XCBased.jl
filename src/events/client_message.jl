@@ -17,3 +17,14 @@ function XCBClientMessageEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 		data
 	)
 end
+
+function libxcb_event(ev:: XCBClientMessageEvent):: LibXCB.xcb_client_message_event_t
+	LibXCB.xcb_client_message_event_t(
+		LibXCB.XCB_CLIENT_MESSAGE,
+		ev.format,
+		ev.sequence,
+		ev.window,
+		ev.type,
+		LibXCB.xcb_client_message_data_t((ev.data...,))
+	)
+end

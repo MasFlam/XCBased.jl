@@ -16,3 +16,16 @@ function XCBPropertyNotifyEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 		ev.state
 	)
 end
+
+function libxcb_event(ev:: XCBPropertyNotifyEvent):: LibXCB.xcb_property_notify_event_t
+	LibXCB.xcb_property_notify_event_t(
+		LibXCB.XCB_PROPERTY_NOTIFY,
+		0, # pad
+		ev.sequence,
+		ev.window,
+		ev.atom,
+		ev.time,
+		ev.state,
+		(0, 0, 0) # pad
+	)
+end

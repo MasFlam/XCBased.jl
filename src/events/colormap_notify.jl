@@ -16,3 +16,16 @@ function XCBColormapNotifyEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 		ev.state
 	)
 end
+
+function libxcb_event(ev:: XCBColormapNotifyEvent):: LibXCB.xcb_colormap_notify_event_t
+	LibXCB.xcb_colormap_notify_event_t(
+		LibXCB.XCB_COLORMAP_NOTIFY,
+		0, # pad
+		ev.sequence,
+		ev.window,
+		ev.colormap,
+		ev.new,
+		ev.state,
+		(0, 0) # pad
+	)
+end

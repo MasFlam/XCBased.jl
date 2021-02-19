@@ -14,3 +14,14 @@ function XCBSelectionClearEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 		ev.selection
 	)
 end
+
+function libxcb_event(ev:: XCBSelectionClearEvent):: LibXCB.xcb_selection_clear_event_t
+	LibXCB.xcb_selection_clear_event_t(
+		LibXCB.XCB_SELECTION_CLEAR,
+		0, # pad
+		ev.sequence,
+		ev.time,
+		ev.owner,
+		ev.selection
+	)
+end
