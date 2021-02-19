@@ -65,7 +65,7 @@ end
 
 #= OTHERS =#
 
-export generate_id
+export generate_id, xcb_flush, get_maximum_request_length
 
 function generate_id(conn:: XCBConnection):: UInt32
 	LibXCB.xcb_generate_id(conn.handle)

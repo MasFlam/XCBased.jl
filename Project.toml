@@ -1,7 +1,7 @@
 name = "XCBased"
 uuid = "fac17066-6efe-4494-9398-e70f574ba8bc"
 authors = ["MasFlam <masflam@masflam.com>"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 CEnum = "fa961155-64e5-5f13-b03f-caf6b980ea82"
