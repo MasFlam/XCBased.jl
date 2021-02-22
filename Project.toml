@@ -10,4 +10,4 @@ Xorg_libxcb_jll = "c7cfdc94-dc32-55de-ac96-5a1b8d977c5b"
 [compat]
 CEnum = "0.4"
 Xorg_libxcb_jll = "1.13"
-julia = "~1.5.0"
+julia = "1.5"
