@@ -326,7 +326,12 @@ include("requests/poly_arc.jl");                   export poly_arc
 include("requests/fill_poly.jl");                  export fill_poly
 include("requests/poly_fill_rectangle.jl");        export poly_fill_rectangle
 include("requests/poly_fill_arc.jl");              export poly_fill_arc
-# TODO: put_image through image_text_16
+include("requests/put_image.jl");                  export put_image
+include("requests/get_image.jl");                  export get_image
+include("requests/poly_text_8.jl");                export poly_text_8
+include("requests/poly_text_16.jl");               export poly_text_16
+include("requests/image_text_8.jl");               export image_text_8
+include("requests/image_text_16.jl");              export image_text_16
 include("requests/create_colormap.jl");            export create_colormap
 include("requests/free_colormap.jl");              export free_colormap
 include("requests/copy_colormap_and_free.jl");     export copy_colormap_and_free
