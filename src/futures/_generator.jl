@@ -6,6 +6,7 @@ pascal_names = [
 	"GetAtomName",
 	"GetFontPath",
 	"GetGeometry",
+	"GetImage",
 	"GetInputFocus",
 	"GetKeyboardControl",
 	"GetKeyboardMapping",
@@ -44,6 +45,7 @@ snake_names = [
 	"get_atom_name",
 	"get_font_path",
 	"get_geometry",
+	"get_image",
 	"get_input_focus",
 	"get_keyboard_control",
 	"get_keyboard_mapping",
@@ -76,8 +78,14 @@ snake_names = [
 	"translate_coordinates"
 ]
 
+fpath(s) = joinpath(@__DIR__, "$s.jl")
+
 for (pascal, snake) in zip(pascal_names, snake_names)
-	open("$snake.jl", "w") do io
+	if isfile(fpath(snake))
+		printstyled("$snake.jl exists - skipping.\n", color = :yellow)
+		continue
+	end
+	open(fpath(snake), "w") do io
 		s = """
 		mutable struct XCB$(pascal)Future <: XCBFuture
 			conn:: XCBConnection
@@ -111,4 +119,5 @@ for (pascal, snake) in zip(pascal_names, snake_names)
 		"""
 		write(io, s)
 	end
+	printstyled("Written to $snake.jl.\n", color = :green)
 end

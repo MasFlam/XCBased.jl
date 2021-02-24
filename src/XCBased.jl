@@ -170,6 +170,7 @@ include("replies/alloc_named_color.jl");        export XCBAllocNamedColorReply
 include("replies/get_atom_name.jl");            export XCBGetAtomNameReply
 include("replies/get_font_path.jl");            export XCBGetFontPathReply
 include("replies/get_geometry.jl");             export XCBGetGeometryReply
+include("replies/get_image.jl");                export XCBGetImageReply
 include("replies/get_input_focus.jl");          export XCBGetInputFocusReply
 include("replies/get_keyboard_control.jl");     export XCBGetKeyboardControlReply
 include("replies/get_keyboard_mapping.jl");     export XCBGetKeyboardMappingReply
@@ -222,6 +223,7 @@ include("futures/alloc_named_color.jl");        export XCBAllocNamedColorFuture
 include("futures/get_atom_name.jl");            export XCBGetAtomNameFuture
 include("futures/get_font_path.jl");            export XCBGetFontPathFuture
 include("futures/get_geometry.jl");             export XCBGetGeometryFuture
+include("futures/get_image.jl");                export XCBGetImageFuture
 include("futures/get_input_focus.jl");          export XCBGetInputFocusFuture
 include("futures/get_keyboard_control.jl");     export XCBGetKeyboardControlFuture
 include("futures/get_keyboard_mapping.jl");     export XCBGetKeyboardMappingFuture

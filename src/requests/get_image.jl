@@ -8,7 +8,7 @@ function get_image(
 	height:: Integer,
 	plane_mask:: Integer;
 	checked:: Bool
-):: XCBVoidFuture
+):: XCBGetImageFuture
 	fn = checked ? LibXCB.xcb_get_image : LibXCB.xcb_get_image_unchecked
 	cookie = fn(
 		conn.handle,
@@ -20,5 +20,5 @@ function get_image(
 		plane_mask
 	)
 	
-	XCBVoidFuture(conn, cookie, checked)
+	XCBGetImageFuture(conn, cookie, checked)
 end
