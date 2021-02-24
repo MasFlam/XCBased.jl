@@ -187,6 +187,7 @@ include("replies/grab_pointer.jl");             export XCBGrabPointerReply
 include("replies/list_extensions.jl");          export XCBListExtensionsReply
 include("replies/list_fonts.jl");               export XCBListFontsReply
 include("replies/list_fonts_with_info.jl");     export XCBListFontsWithInfoReply
+include("replies/list_hosts.jl");               export XCBListHostsReply
 include("replies/list_installed_colormaps.jl"); export XCBListInstalledColormapsReply
 include("replies/list_properties.jl");          export XCBListPropertyReply
 include("replies/lookup_color.jl");             export XCBLookupColorReply
@@ -240,6 +241,7 @@ include("futures/grab_pointer.jl");             export XCBGrabPointerFuture
 include("futures/list_extensions.jl");          export XCBListExtensionsFuture
 include("futures/list_fonts.jl");               export XCBListFontsFuture
 include("futures/list_fonts_with_info.jl");     export XCBListFontsWithInfoFuture
+include("futures/list_hosts.jl");               export XCBListHostsFuture
 include("futures/list_installed_colormaps.jl"); export XCBListInstalledColormapsFuture
 include("futures/list_properties.jl");          export XCBListPropertiesFuture
 include("futures/lookup_color.jl");             export XCBLookupColorFuture
@@ -364,7 +366,9 @@ include("requests/change_pointer_control.jl");     export change_pointer_control
 include("requests/get_pointer_control.jl");        export get_pointer_control
 include("requests/set_screen_saver.jl");           export set_screen_saver
 include("requests/get_screen_saver.jl");           export get_screen_saver
-# TODO: Hosts / Access control requests
+include("requests/change_hosts.jl");               export change_hosts
+include("requests/list_hosts.jl");                 export list_hosts
+include("requests/set_access_control.jl");         export set_access_control
 include("requests/set_close_down_mode.jl");        export set_close_down_mode
 include("requests/kill_client.jl");                export kill_client
 include("requests/rotate_properties.jl");          export rotate_properties
