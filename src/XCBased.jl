@@ -7,7 +7,7 @@ include("../gen/LibXCB.jl")
 
 #= CONNECTION =#
 
-export XCBConnection, xcb_connect, xcb_disconnect, XCBConnectionError
+export XCBConnection, xcb_connect, xcb_disconnect, XCBConnectionError, connection_has_error
 export XCBVisualType, XCBScreen, XCBFormat, XCBSetup, get_setup
 
 # mutable so that we can attach a finalizer to it
@@ -41,6 +41,11 @@ end
 # TODO: Maybe create separate Exception types?
 struct XCBConnectionError <: Exception
 	type:: Cint
+end
+
+function connection_has_error(conn:: XCBConnection):: Union{Cint, Nothing}
+	err = LibXCB.xcb_connection_has_error(conn.handle)
+	return err == 0 ? nothing : err
 end
 
 include("xcb_setup.jl")
