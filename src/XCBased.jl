@@ -11,6 +11,12 @@ export XCBConnection, xcb_connect, xcb_disconnect, XCBConnectionError, connectio
 export XCBVisualType, XCBScreen, XCBFormat, XCBSetup, get_setup
 
 # mutable so that we can attach a finalizer to it
+"""
+	XCBConnection
+Represents a connection to an X server. You can access the `preferred_screen` property to get the
+number of the preferred screen for the connection. Do not modify any fields of this struct. Do not
+construct this struct yourself, use [`xcb_connect`](@ref).
+"""
 mutable struct XCBConnection
 	handle:: Ptr{LibXCB.xcb_connection_t}
 	preferred_screen:: Cint
@@ -22,6 +28,11 @@ mutable struct XCBConnection
 	end
 end
 
+"""
+	xcb_connect(display_name:: Union{AbstractString, Nothing} = nothing) -> XCBConnection
+Connect to an X server at `display_name`. If `display_name` is `nothing`, XCB will use the `DISPLAY`
+environment variable. The function throws an [`XCBConnectionError`](@ref) if one occurs.
+"""
 function xcb_connect(display_name:: Union{AbstractString, Nothing} = nothing):: XCBConnection
 	screenp = Ref{Cint}()
 	connptr = LibXCB.xcb_connect(display_name === nothing ? C_NULL : display_name, screenp)
@@ -32,6 +43,10 @@ function xcb_connect(display_name:: Union{AbstractString, Nothing} = nothing):: 
 	throw(XCBConnectionError(errtype))
 end
 
+"""
+	xcb_disconnect(conn:: XCBConnection)
+Close the connection to an X server.
+"""
 function xcb_disconnect(conn:: XCBConnection)
 	LibXCB.xcb_disconnect(conn.handle)
 	conn.handle = C_NULL
@@ -39,10 +54,26 @@ function xcb_disconnect(conn:: XCBConnection)
 end
 
 # TODO: Maybe create separate Exception types?
+"""
+	XCBConnectionError <: Exception
+The `type` field contains the code for the error. It is one of:
+* `XCB_CONN_ERROR`
+* `XCB_CONN_CLOSED_EXT_NOTSUPPORTED`
+* `XCB_CONN_CLOSED_MEM_INSUFFICIENT`
+* `XCB_CONN_CLOSED_REQ_LEN_EXCEED`
+* `XCB_CONN_CLOSED_PARSE_ERR`
+* `XCB_CONN_CLOSED_INVALID_SCREEN`
+* `XCB_CONN_CLOSED_FDPASSING_FAILED`
+"""
 struct XCBConnectionError <: Exception
 	type:: Cint
 end
 
+"""
+	connection_has_error(conn:: XCBConnection) -> Union{Cint, Nothing}
+Returns one of the constants listed in [`XCBConnectionError`](@ref), or `nothing` if there is no
+error.
+"""
 function connection_has_error(conn:: XCBConnection):: Union{Cint, Nothing}
 	err = LibXCB.xcb_connection_has_error(conn.handle)
 	return err == 0 ? nothing : err
@@ -72,14 +103,35 @@ end
 
 export generate_id, xcb_flush, get_maximum_request_length
 
+"""
+	generate_id(conn:: XCBConnection) -> UInt32
+Generates an X resource ID (XID). Binds to the `xcb_generate_id` function in XCB.
+"""
 function generate_id(conn:: XCBConnection):: UInt32
 	LibXCB.xcb_generate_id(conn.handle)
 end
 
+"""
+	xcb_flush(conn:: XCBConnection) -> Bool
+Forces any buffered output to be written to the server. Blocks until the write is complete. Returns
+`true` if the flush succeeds, or `false` otherwise.
+"""
 function xcb_flush(conn:: XCBConnection):: Bool
 	LibXCB.xcb_flush(conn.handle) == 1
 end
 
+"""
+	get_maximum_request_length(conn:: XCBConnection) -> UInt32
+From the XCB documentation:
+> In the absence of the BIG-REQUESTS extension, returns the maximum request length field from the
+> connection setup data, which may be as much as 65535. If the server supports BIG-REQUESTS, then the
+> maximum request length field from the reply to the BigRequestsEnable request will be returned
+> instead.
+>
+> Note that this length is measured in four-byte units, making the
+> theoretical maximum lengths roughly 256kB without BIG-REQUESTS and
+> 16GB with.
+"""
 function get_maximum_request_length(conn:: XCBConnection):: UInt32
 	LibXCB.get_maximum_request_length(conn.handle)
 end
@@ -89,10 +141,29 @@ end
 
 export XCBError, sequence, minor_opcode, major_opcode
 
+"""
+	XCBError <: Exception
+Abstract supertype of all XCB errors from replies.
+"""
 abstract type XCBError <: Exception end
 
+"""
+	sequence(error:: XCBError) -> UInt16
+Get the first 16 bits of the sequence number of the error.
+"""
 sequence(e:: XCBError):: UInt16 = e.sequence
+
+
+"""
+	minor_opcode(error:: XCBError) -> UInt16
+Get the minor opcode of the error.
+"""
 minor_opcode(e:: XCBError):: UInt16 = e.minor_opcode
+
+"""
+	major_opcode(error:: XCBError) -> UInt8
+Get the major opcode of the error.
+"""
 major_opcode(e:: XCBError):: UInt8 = e.major_opcode
 
 include("errors/request.jl");        export XCBRequestError
@@ -120,9 +191,18 @@ include("errors.jl")
 
 export XCBEvent, sequence, wait_for_event, poll_for_event
 
+"""
+	XCBEvent
+Abstract supertype of all XCB events.
+"""
 abstract type XCBEvent end
 
+"""
+	sequence(event:: XCBEvent) -> UInt16
+Get the first 16 bits of the sequence number of the event.
+"""
 sequence(e:: XCBEvent):: UInt16 = e.sequence
+
 libxcb_event(::XCBEvent) = error("unimplemented")
 
 include("events/key_press.jl");         export XCBKeyPressEvent
@@ -166,8 +246,16 @@ include("events.jl")
 
 export XCBReply, sequence
 
+"""
+	XCBReply
+Abstract supertype of all XCB replies.
+"""
 abstract type XCBReply end
 
+"""
+	sequence(reply:: XCBReply) -> UInt16
+Get the first 16 bits of the sequence number of the reply.
+"""
 sequence(reply:: XCBReply):: UInt16 = reply.sequence
 
 include("replies/alloc_color.jl");              export XCBAllocColorReply
@@ -213,12 +301,37 @@ include("replies/translate_coordinates.jl");    export XCBTranslateCoordinatesRe
 
 export XCBFuture, sequence, discard, XCBVoidFuture
 
+"""
+	XCBFuture
+Abstract supertype of all XCBased futures.
+"""
 abstract type XCBFuture end
 
+"""
+	sequence(future:: XCBFuture) -> UInt16
+Get the first 16 bits of the sequence number of the corresponding request.
+"""
 sequence(f:: XCBFuture):: UInt16 = UInt16(f.cookie.sequence & 0xffff)
+
+"""
+	fetch(future:: XCBFuture) -> Union{XCBReply, Nothing}
+Block until the reply for the corresponding request is received, and return it. If the future is a
+[`XCBVoidFuture`](@ref), this returns `nothing`.
+"""
 fetch(::XCBFuture) = error("unimplemented")
+
+"""
+	wait(future:: XCBFuture)
+Block until the reply for the corresponding request is received. The function always returns
+`nothing`.
+"""
 wait(f:: XCBFuture) = (fetch(f); nothing)
 
+
+"""
+	discard(future:: XCBFuture)
+Discard the reply for the given future.
+"""
 function discard(f:: XCBFuture)
 	LibXCB.xcb_discard_reply(f.conn.handle, f.cookie.sequence)
 	f.reply = nothing
