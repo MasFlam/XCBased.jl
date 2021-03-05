@@ -16,6 +16,77 @@ const XCB_CONN_CLOSED_FDPASSING_FAILED = 7
 
 # Skipping MacroDefinition: XCB_TYPE_PAD ( T , I ) ( - ( I ) & ( sizeof ( T ) > 4 ? 3 : sizeof ( T ) - 1 ) )
 
+const XCB_NONE = Int32(0)
+const XCB_COPY_FROM_PARENT = Int32(0)
+const XCB_CURRENT_TIME = Int32(0)
+const XCB_NO_SYMBOL = Int32(0)
+const xcb_connection_t = Cvoid
+
+struct xcb_generic_iterator_t
+    data::Ptr{Cvoid}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_generic_reply_t
+    response_type::UInt8
+    pad0::UInt8
+    sequence::UInt16
+    length::UInt32
+end
+
+struct xcb_generic_event_t
+    response_type::UInt8
+    pad0::UInt8
+    sequence::UInt16
+    pad::NTuple{7, UInt32}
+    full_sequence::UInt32
+end
+
+struct xcb_raw_generic_event_t
+    response_type::UInt8
+    pad0::UInt8
+    sequence::UInt16
+    pad::NTuple{7, UInt32}
+end
+
+struct xcb_ge_event_t
+    response_type::UInt8
+    pad0::UInt8
+    sequence::UInt16
+    length::UInt32
+    event_type::UInt16
+    pad1::UInt16
+    pad::NTuple{5, UInt32}
+    full_sequence::UInt32
+end
+
+struct xcb_generic_error_t
+    response_type::UInt8
+    error_code::UInt8
+    sequence::UInt16
+    resource_id::UInt32
+    minor_code::UInt16
+    major_code::UInt8
+    pad0::UInt8
+    pad::NTuple{5, UInt32}
+    full_sequence::UInt32
+end
+
+struct xcb_void_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_auth_info_t
+    namelen::Cint
+    name::Cstring
+    datalen::Cint
+    data::Cstring
+end
+
+const xcb_special_event = Cvoid
+const xcb_special_event_t = xcb_special_event
+const xcb_extension_t = Cvoid
 const XCB_KEY_PRESS = 2
 const XCB_KEY_RELEASE = 3
 const XCB_BUTTON_PRESS = 4
@@ -187,66 +258,6 @@ const XCB_GET_POINTER_MAPPING = 117
 const XCB_SET_MODIFIER_MAPPING = 118
 const XCB_GET_MODIFIER_MAPPING = 119
 const XCB_NO_OPERATION = 127
-const XCB_NONE = Int32(0)
-const XCB_COPY_FROM_PARENT = Int32(0)
-const XCB_CURRENT_TIME = Int32(0)
-const XCB_NO_SYMBOL = Int32(0)
-const xcb_connection_t = Cvoid
-
-struct xcb_generic_iterator_t
-    data::Ptr{Cvoid}
-    rem::Cint
-    index::Cint
-end
-
-struct xcb_generic_reply_t
-    response_type::UInt8
-    pad0::UInt8
-    sequence::UInt16
-    length::UInt32
-end
-
-struct xcb_generic_event_t
-    response_type::UInt8
-    pad0::UInt8
-    sequence::UInt16
-    pad::NTuple{7, UInt32}
-    full_sequence::UInt32
-end
-
-struct xcb_raw_generic_event_t
-    response_type::UInt8
-    pad0::UInt8
-    sequence::UInt16
-    pad::NTuple{7, UInt32}
-end
-
-struct xcb_ge_event_t
-    response_type::UInt8
-    pad0::UInt8
-    sequence::UInt16
-    length::UInt32
-    event_type::UInt16
-    pad1::UInt16
-    pad::NTuple{5, UInt32}
-    full_sequence::UInt32
-end
-
-struct xcb_generic_error_t
-    response_type::UInt8
-    error_code::UInt8
-    sequence::UInt16
-    resource_id::UInt32
-    minor_code::UInt16
-    major_code::UInt8
-    pad0::UInt8
-    pad::NTuple{5, UInt32}
-    full_sequence::UInt32
-end
-
-struct xcb_void_cookie_t
-    sequence::UInt32
-end
 
 struct xcb_char2b_t
     byte1::UInt8
@@ -3429,13 +3440,2373 @@ struct xcb_no_operation_request_t
     length::UInt16
 end
 
-struct xcb_auth_info_t
-    namelen::Cint
-    name::Cstring
-    datalen::Cint
-    data::Cstring
+const XCB_XKB_MAJOR_VERSION = 1
+const XCB_XKB_MINOR_VERSION = 0
+const XCB_XKB_KEYBOARD = 0
+const XCB_XKB_USE_EXTENSION = 0
+const XCB_XKB_SELECT_EVENTS = 1
+const XCB_XKB_BELL = 3
+const XCB_XKB_GET_STATE = 4
+const XCB_XKB_LATCH_LOCK_STATE = 5
+const XCB_XKB_GET_CONTROLS = 6
+const XCB_XKB_SET_CONTROLS = 7
+const XCB_XKB_GET_MAP = 8
+const XCB_XKB_SET_MAP = 9
+const XCB_XKB_GET_COMPAT_MAP = 10
+const XCB_XKB_SET_COMPAT_MAP = 11
+const XCB_XKB_GET_INDICATOR_STATE = 12
+const XCB_XKB_GET_INDICATOR_MAP = 13
+const XCB_XKB_SET_INDICATOR_MAP = 14
+const XCB_XKB_GET_NAMED_INDICATOR = 15
+const XCB_XKB_SET_NAMED_INDICATOR = 16
+const XCB_XKB_GET_NAMES = 17
+const XCB_XKB_SET_NAMES = 18
+const XCB_XKB_PER_CLIENT_FLAGS = 21
+const XCB_XKB_LIST_COMPONENTS = 22
+const XCB_XKB_GET_KBD_BY_NAME = 23
+const XCB_XKB_GET_DEVICE_INFO = 24
+const XCB_XKB_SET_DEVICE_INFO = 25
+const XCB_XKB_SET_DEBUGGING_FLAGS = 101
+const XCB_XKB_NEW_KEYBOARD_NOTIFY = 0
+const XCB_XKB_MAP_NOTIFY = 1
+const XCB_XKB_STATE_NOTIFY = 2
+const XCB_XKB_CONTROLS_NOTIFY = 3
+const XCB_XKB_INDICATOR_STATE_NOTIFY = 4
+const XCB_XKB_INDICATOR_MAP_NOTIFY = 5
+const XCB_XKB_NAMES_NOTIFY = 6
+const XCB_XKB_COMPAT_MAP_NOTIFY = 7
+const XCB_XKB_BELL_NOTIFY = 8
+const XCB_XKB_ACTION_MESSAGE = 9
+const XCB_XKB_ACCESS_X_NOTIFY = 10
+const XCB_XKB_EXTENSION_DEVICE_NOTIFY = 11
+
+@cenum xcb_xkb_const_t::UInt32 begin
+    XCB_XKB_CONST_MAX_LEGAL_KEY_CODE = 255
+    XCB_XKB_CONST_PER_KEY_BIT_ARRAY_SIZE = 32
+    XCB_XKB_CONST_KEY_NAME_LENGTH = 4
 end
 
-const xcb_special_event = Cvoid
-const xcb_special_event_t = xcb_special_event
-const xcb_extension_t = Cvoid
+@cenum xcb_xkb_event_type_t::UInt32 begin
+    XCB_XKB_EVENT_TYPE_NEW_KEYBOARD_NOTIFY = 1
+    XCB_XKB_EVENT_TYPE_MAP_NOTIFY = 2
+    XCB_XKB_EVENT_TYPE_STATE_NOTIFY = 4
+    XCB_XKB_EVENT_TYPE_CONTROLS_NOTIFY = 8
+    XCB_XKB_EVENT_TYPE_INDICATOR_STATE_NOTIFY = 16
+    XCB_XKB_EVENT_TYPE_INDICATOR_MAP_NOTIFY = 32
+    XCB_XKB_EVENT_TYPE_NAMES_NOTIFY = 64
+    XCB_XKB_EVENT_TYPE_COMPAT_MAP_NOTIFY = 128
+    XCB_XKB_EVENT_TYPE_BELL_NOTIFY = 256
+    XCB_XKB_EVENT_TYPE_ACTION_MESSAGE = 512
+    XCB_XKB_EVENT_TYPE_ACCESS_X_NOTIFY = 1024
+    XCB_XKB_EVENT_TYPE_EXTENSION_DEVICE_NOTIFY = 2048
+end
+
+@cenum xcb_xkb_nkn_detail_t::UInt32 begin
+    XCB_XKB_NKN_DETAIL_KEYCODES = 1
+    XCB_XKB_NKN_DETAIL_GEOMETRY = 2
+    XCB_XKB_NKN_DETAIL_DEVICE_ID = 4
+end
+
+@cenum xcb_xkb_axn_detail_t::UInt32 begin
+    XCB_XKB_AXN_DETAIL_SK_PRESS = 1
+    XCB_XKB_AXN_DETAIL_SK_ACCEPT = 2
+    XCB_XKB_AXN_DETAIL_SK_REJECT = 4
+    XCB_XKB_AXN_DETAIL_SK_RELEASE = 8
+    XCB_XKB_AXN_DETAIL_BK_ACCEPT = 16
+    XCB_XKB_AXN_DETAIL_BK_REJECT = 32
+    XCB_XKB_AXN_DETAIL_AXK_WARNING = 64
+end
+
+@cenum xcb_xkb_map_part_t::UInt32 begin
+    XCB_XKB_MAP_PART_KEY_TYPES = 1
+    XCB_XKB_MAP_PART_KEY_SYMS = 2
+    XCB_XKB_MAP_PART_MODIFIER_MAP = 4
+    XCB_XKB_MAP_PART_EXPLICIT_COMPONENTS = 8
+    XCB_XKB_MAP_PART_KEY_ACTIONS = 16
+    XCB_XKB_MAP_PART_KEY_BEHAVIORS = 32
+    XCB_XKB_MAP_PART_VIRTUAL_MODS = 64
+    XCB_XKB_MAP_PART_VIRTUAL_MOD_MAP = 128
+end
+
+@cenum xcb_xkb_set_map_flags_t::UInt32 begin
+    XCB_XKB_SET_MAP_FLAGS_RESIZE_TYPES = 1
+    XCB_XKB_SET_MAP_FLAGS_RECOMPUTE_ACTIONS = 2
+end
+
+@cenum xcb_xkb_state_part_t::UInt32 begin
+    XCB_XKB_STATE_PART_MODIFIER_STATE = 1
+    XCB_XKB_STATE_PART_MODIFIER_BASE = 2
+    XCB_XKB_STATE_PART_MODIFIER_LATCH = 4
+    XCB_XKB_STATE_PART_MODIFIER_LOCK = 8
+    XCB_XKB_STATE_PART_GROUP_STATE = 16
+    XCB_XKB_STATE_PART_GROUP_BASE = 32
+    XCB_XKB_STATE_PART_GROUP_LATCH = 64
+    XCB_XKB_STATE_PART_GROUP_LOCK = 128
+    XCB_XKB_STATE_PART_COMPAT_STATE = 256
+    XCB_XKB_STATE_PART_GRAB_MODS = 512
+    XCB_XKB_STATE_PART_COMPAT_GRAB_MODS = 1024
+    XCB_XKB_STATE_PART_LOOKUP_MODS = 2048
+    XCB_XKB_STATE_PART_COMPAT_LOOKUP_MODS = 4096
+    XCB_XKB_STATE_PART_POINTER_BUTTONS = 8192
+end
+
+@cenum xcb_xkb_bool_ctrl_t::UInt32 begin
+    XCB_XKB_BOOL_CTRL_REPEAT_KEYS = 1
+    XCB_XKB_BOOL_CTRL_SLOW_KEYS = 2
+    XCB_XKB_BOOL_CTRL_BOUNCE_KEYS = 4
+    XCB_XKB_BOOL_CTRL_STICKY_KEYS = 8
+    XCB_XKB_BOOL_CTRL_MOUSE_KEYS = 16
+    XCB_XKB_BOOL_CTRL_MOUSE_KEYS_ACCEL = 32
+    XCB_XKB_BOOL_CTRL_ACCESS_X_KEYS = 64
+    XCB_XKB_BOOL_CTRL_ACCESS_X_TIMEOUT_MASK = 128
+    XCB_XKB_BOOL_CTRL_ACCESS_X_FEEDBACK_MASK = 256
+    XCB_XKB_BOOL_CTRL_AUDIBLE_BELL_MASK = 512
+    XCB_XKB_BOOL_CTRL_OVERLAY_1_MASK = 1024
+    XCB_XKB_BOOL_CTRL_OVERLAY_2_MASK = 2048
+    XCB_XKB_BOOL_CTRL_IGNORE_GROUP_LOCK_MASK = 4096
+end
+
+@cenum xcb_xkb_control_t::UInt32 begin
+    XCB_XKB_CONTROL_GROUPS_WRAP = 134217728
+    XCB_XKB_CONTROL_INTERNAL_MODS = 268435456
+    XCB_XKB_CONTROL_IGNORE_LOCK_MODS = 536870912
+    XCB_XKB_CONTROL_PER_KEY_REPEAT = 1073741824
+    XCB_XKB_CONTROL_CONTROLS_ENABLED = 2147483648
+end
+
+@cenum xcb_xkb_ax_option_t::UInt32 begin
+    XCB_XKB_AX_OPTION_SK_PRESS_FB = 1
+    XCB_XKB_AX_OPTION_SK_ACCEPT_FB = 2
+    XCB_XKB_AX_OPTION_FEATURE_FB = 4
+    XCB_XKB_AX_OPTION_SLOW_WARN_FB = 8
+    XCB_XKB_AX_OPTION_INDICATOR_FB = 16
+    XCB_XKB_AX_OPTION_STICKY_KEYS_FB = 32
+    XCB_XKB_AX_OPTION_TWO_KEYS = 64
+    XCB_XKB_AX_OPTION_LATCH_TO_LOCK = 128
+    XCB_XKB_AX_OPTION_SK_RELEASE_FB = 256
+    XCB_XKB_AX_OPTION_SK_REJECT_FB = 512
+    XCB_XKB_AX_OPTION_BK_REJECT_FB = 1024
+    XCB_XKB_AX_OPTION_DUMB_BELL = 2048
+end
+
+
+const xcb_xkb_device_spec_t = UInt16
+
+struct xcb_xkb_device_spec_iterator_t
+    data::Ptr{xcb_xkb_device_spec_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_led_class_result_t::UInt32 begin
+    XCB_XKB_LED_CLASS_RESULT_KBD_FEEDBACK_CLASS = 0
+    XCB_XKB_LED_CLASS_RESULT_LED_FEEDBACK_CLASS = 4
+end
+
+@cenum xcb_xkb_led_class_t::UInt32 begin
+    XCB_XKB_LED_CLASS_KBD_FEEDBACK_CLASS = 0
+    XCB_XKB_LED_CLASS_LED_FEEDBACK_CLASS = 4
+    XCB_XKB_LED_CLASS_DFLT_XI_CLASS = 768
+    XCB_XKB_LED_CLASS_ALL_XI_CLASSES = 1280
+end
+
+
+const xcb_xkb_led_class_spec_t = UInt16
+
+struct xcb_xkb_led_class_spec_iterator_t
+    data::Ptr{xcb_xkb_led_class_spec_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_bell_class_result_t::UInt32 begin
+    XCB_XKB_BELL_CLASS_RESULT_KBD_FEEDBACK_CLASS = 0
+    XCB_XKB_BELL_CLASS_RESULT_BELL_FEEDBACK_CLASS = 5
+end
+
+@cenum xcb_xkb_bell_class_t::UInt32 begin
+    XCB_XKB_BELL_CLASS_KBD_FEEDBACK_CLASS = 0
+    XCB_XKB_BELL_CLASS_BELL_FEEDBACK_CLASS = 5
+    XCB_XKB_BELL_CLASS_DFLT_XI_CLASS = 768
+end
+
+
+const xcb_xkb_bell_class_spec_t = UInt16
+
+struct xcb_xkb_bell_class_spec_iterator_t
+    data::Ptr{xcb_xkb_bell_class_spec_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_id_t::UInt32 begin
+    XCB_XKB_ID_USE_CORE_KBD = 256
+    XCB_XKB_ID_USE_CORE_PTR = 512
+    XCB_XKB_ID_DFLT_XI_CLASS = 768
+    XCB_XKB_ID_DFLT_XI_ID = 1024
+    XCB_XKB_ID_ALL_XI_CLASS = 1280
+    XCB_XKB_ID_ALL_XI_ID = 1536
+    XCB_XKB_ID_XI_NONE = 65280
+end
+
+
+const xcb_xkb_id_spec_t = UInt16
+
+struct xcb_xkb_id_spec_iterator_t
+    data::Ptr{xcb_xkb_id_spec_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_group_t::UInt32 begin
+    XCB_XKB_GROUP_1 = 0
+    XCB_XKB_GROUP_2 = 1
+    XCB_XKB_GROUP_3 = 2
+    XCB_XKB_GROUP_4 = 3
+end
+
+@cenum xcb_xkb_groups_t::UInt32 begin
+    XCB_XKB_GROUPS_ANY = 254
+    XCB_XKB_GROUPS_ALL = 255
+end
+
+@cenum xcb_xkb_set_of_group_t::UInt32 begin
+    XCB_XKB_SET_OF_GROUP_GROUP_1 = 1
+    XCB_XKB_SET_OF_GROUP_GROUP_2 = 2
+    XCB_XKB_SET_OF_GROUP_GROUP_3 = 4
+    XCB_XKB_SET_OF_GROUP_GROUP_4 = 8
+end
+
+@cenum xcb_xkb_set_of_groups_t::UInt32 begin
+    XCB_XKB_SET_OF_GROUPS_ANY = 128
+end
+
+@cenum xcb_xkb_groups_wrap_t::UInt32 begin
+    XCB_XKB_GROUPS_WRAP_WRAP_INTO_RANGE = 0
+    XCB_XKB_GROUPS_WRAP_CLAMP_INTO_RANGE = 64
+    XCB_XKB_GROUPS_WRAP_REDIRECT_INTO_RANGE = 128
+end
+
+@cenum xcb_xkb_v_mods_high_t::UInt32 begin
+    XCB_XKB_V_MODS_HIGH_15 = 128
+    XCB_XKB_V_MODS_HIGH_14 = 64
+    XCB_XKB_V_MODS_HIGH_13 = 32
+    XCB_XKB_V_MODS_HIGH_12 = 16
+    XCB_XKB_V_MODS_HIGH_11 = 8
+    XCB_XKB_V_MODS_HIGH_10 = 4
+    XCB_XKB_V_MODS_HIGH_9 = 2
+    XCB_XKB_V_MODS_HIGH_8 = 1
+end
+
+@cenum xcb_xkb_v_mods_low_t::UInt32 begin
+    XCB_XKB_V_MODS_LOW_7 = 128
+    XCB_XKB_V_MODS_LOW_6 = 64
+    XCB_XKB_V_MODS_LOW_5 = 32
+    XCB_XKB_V_MODS_LOW_4 = 16
+    XCB_XKB_V_MODS_LOW_3 = 8
+    XCB_XKB_V_MODS_LOW_2 = 4
+    XCB_XKB_V_MODS_LOW_1 = 2
+    XCB_XKB_V_MODS_LOW_0 = 1
+end
+
+@cenum xcb_xkb_v_mod_t::UInt32 begin
+    XCB_XKB_V_MOD_15 = 32768
+    XCB_XKB_V_MOD_14 = 16384
+    XCB_XKB_V_MOD_13 = 8192
+    XCB_XKB_V_MOD_12 = 4096
+    XCB_XKB_V_MOD_11 = 2048
+    XCB_XKB_V_MOD_10 = 1024
+    XCB_XKB_V_MOD_9 = 512
+    XCB_XKB_V_MOD_8 = 256
+    XCB_XKB_V_MOD_7 = 128
+    XCB_XKB_V_MOD_6 = 64
+    XCB_XKB_V_MOD_5 = 32
+    XCB_XKB_V_MOD_4 = 16
+    XCB_XKB_V_MOD_3 = 8
+    XCB_XKB_V_MOD_2 = 4
+    XCB_XKB_V_MOD_1 = 2
+    XCB_XKB_V_MOD_0 = 1
+end
+
+@cenum xcb_xkb_explicit_t::UInt32 begin
+    XCB_XKB_EXPLICIT_V_MOD_MAP = 128
+    XCB_XKB_EXPLICIT_BEHAVIOR = 64
+    XCB_XKB_EXPLICIT_AUTO_REPEAT = 32
+    XCB_XKB_EXPLICIT_INTERPRET = 16
+    XCB_XKB_EXPLICIT_KEY_TYPE_4 = 8
+    XCB_XKB_EXPLICIT_KEY_TYPE_3 = 4
+    XCB_XKB_EXPLICIT_KEY_TYPE_2 = 2
+    XCB_XKB_EXPLICIT_KEY_TYPE_1 = 1
+end
+
+@cenum xcb_xkb_sym_interpret_match_t::UInt32 begin
+    XCB_XKB_SYM_INTERPRET_MATCH_NONE_OF = 0
+    XCB_XKB_SYM_INTERPRET_MATCH_ANY_OF_OR_NONE = 1
+    XCB_XKB_SYM_INTERPRET_MATCH_ANY_OF = 2
+    XCB_XKB_SYM_INTERPRET_MATCH_ALL_OF = 3
+    XCB_XKB_SYM_INTERPRET_MATCH_EXACTLY = 4
+end
+
+@cenum xcb_xkb_sym_interp_match_t::UInt32 begin
+    XCB_XKB_SYM_INTERP_MATCH_LEVEL_ONE_ONLY = 128
+    XCB_XKB_SYM_INTERP_MATCH_OP_MASK = 127
+end
+
+@cenum xcb_xkb_im_flag_t::UInt32 begin
+    XCB_XKB_IM_FLAG_NO_EXPLICIT = 128
+    XCB_XKB_IM_FLAG_NO_AUTOMATIC = 64
+    XCB_XKB_IM_FLAG_LED_DRIVES_KB = 32
+end
+
+@cenum xcb_xkb_im_mods_which_t::UInt32 begin
+    XCB_XKB_IM_MODS_WHICH_USE_COMPAT = 16
+    XCB_XKB_IM_MODS_WHICH_USE_EFFECTIVE = 8
+    XCB_XKB_IM_MODS_WHICH_USE_LOCKED = 4
+    XCB_XKB_IM_MODS_WHICH_USE_LATCHED = 2
+    XCB_XKB_IM_MODS_WHICH_USE_BASE = 1
+end
+
+@cenum xcb_xkb_im_groups_which_t::UInt32 begin
+    XCB_XKB_IM_GROUPS_WHICH_USE_COMPAT = 16
+    XCB_XKB_IM_GROUPS_WHICH_USE_EFFECTIVE = 8
+    XCB_XKB_IM_GROUPS_WHICH_USE_LOCKED = 4
+    XCB_XKB_IM_GROUPS_WHICH_USE_LATCHED = 2
+    XCB_XKB_IM_GROUPS_WHICH_USE_BASE = 1
+end
+
+
+struct xcb_xkb_indicator_map_t
+    flags::UInt8
+    whichGroups::UInt8
+    groups::UInt8
+    whichMods::UInt8
+    mods::UInt8
+    realMods::UInt8
+    vmods::UInt16
+    ctrls::UInt32
+end
+
+struct xcb_xkb_indicator_map_iterator_t
+    data::Ptr{xcb_xkb_indicator_map_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_cm_detail_t::UInt32 begin
+    XCB_XKB_CM_DETAIL_SYM_INTERP = 1
+    XCB_XKB_CM_DETAIL_GROUP_COMPAT = 2
+end
+
+@cenum xcb_xkb_name_detail_t::UInt32 begin
+    XCB_XKB_NAME_DETAIL_KEYCODES = 1
+    XCB_XKB_NAME_DETAIL_GEOMETRY = 2
+    XCB_XKB_NAME_DETAIL_SYMBOLS = 4
+    XCB_XKB_NAME_DETAIL_PHYS_SYMBOLS = 8
+    XCB_XKB_NAME_DETAIL_TYPES = 16
+    XCB_XKB_NAME_DETAIL_COMPAT = 32
+    XCB_XKB_NAME_DETAIL_KEY_TYPE_NAMES = 64
+    XCB_XKB_NAME_DETAIL_KT_LEVEL_NAMES = 128
+    XCB_XKB_NAME_DETAIL_INDICATOR_NAMES = 256
+    XCB_XKB_NAME_DETAIL_KEY_NAMES = 512
+    XCB_XKB_NAME_DETAIL_KEY_ALIASES = 1024
+    XCB_XKB_NAME_DETAIL_VIRTUAL_MOD_NAMES = 2048
+    XCB_XKB_NAME_DETAIL_GROUP_NAMES = 4096
+    XCB_XKB_NAME_DETAIL_RG_NAMES = 8192
+end
+
+@cenum xcb_xkb_gbn_detail_t::UInt32 begin
+    XCB_XKB_GBN_DETAIL_TYPES = 1
+    XCB_XKB_GBN_DETAIL_COMPAT_MAP = 2
+    XCB_XKB_GBN_DETAIL_CLIENT_SYMBOLS = 4
+    XCB_XKB_GBN_DETAIL_SERVER_SYMBOLS = 8
+    XCB_XKB_GBN_DETAIL_INDICATOR_MAPS = 16
+    XCB_XKB_GBN_DETAIL_KEY_NAMES = 32
+    XCB_XKB_GBN_DETAIL_GEOMETRY = 64
+    XCB_XKB_GBN_DETAIL_OTHER_NAMES = 128
+end
+
+@cenum xcb_xkb_xi_feature_t::UInt32 begin
+    XCB_XKB_XI_FEATURE_KEYBOARDS = 1
+    XCB_XKB_XI_FEATURE_BUTTON_ACTIONS = 2
+    XCB_XKB_XI_FEATURE_INDICATOR_NAMES = 4
+    XCB_XKB_XI_FEATURE_INDICATOR_MAPS = 8
+    XCB_XKB_XI_FEATURE_INDICATOR_STATE = 16
+end
+
+@cenum xcb_xkb_per_client_flag_t::UInt32 begin
+    XCB_XKB_PER_CLIENT_FLAG_DETECTABLE_AUTO_REPEAT = 1
+    XCB_XKB_PER_CLIENT_FLAG_GRABS_USE_XKB_STATE = 2
+    XCB_XKB_PER_CLIENT_FLAG_AUTO_RESET_CONTROLS = 4
+    XCB_XKB_PER_CLIENT_FLAG_LOOKUP_STATE_WHEN_GRABBED = 8
+    XCB_XKB_PER_CLIENT_FLAG_SEND_EVENT_USES_XKB_STATE = 16
+end
+
+
+struct xcb_xkb_mod_def_t
+    mask::UInt8
+    realMods::UInt8
+    vmods::UInt16
+end
+
+struct xcb_xkb_mod_def_iterator_t
+    data::Ptr{xcb_xkb_mod_def_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_key_name_t
+    name::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_key_name_iterator_t
+    data::Ptr{xcb_xkb_key_name_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_key_alias_t
+    real::NTuple{4, UInt8}
+    alias::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_key_alias_iterator_t
+    data::Ptr{xcb_xkb_key_alias_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_counted_string_16_t
+    length::UInt16
+end
+
+struct xcb_xkb_counted_string_16_iterator_t
+    data::Ptr{xcb_xkb_counted_string_16_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_kt_map_entry_t
+    active::UInt8
+    mods_mask::UInt8
+    level::UInt8
+    mods_mods::UInt8
+    mods_vmods::UInt16
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_kt_map_entry_iterator_t
+    data::Ptr{xcb_xkb_kt_map_entry_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_key_type_t
+    mods_mask::UInt8
+    mods_mods::UInt8
+    mods_vmods::UInt16
+    numLevels::UInt8
+    nMapEntries::UInt8
+    hasPreserve::UInt8
+    pad0::UInt8
+end
+
+struct xcb_xkb_key_type_iterator_t
+    data::Ptr{xcb_xkb_key_type_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_key_sym_map_t
+    kt_index::NTuple{4, UInt8}
+    groupInfo::UInt8
+    width::UInt8
+    nSyms::UInt16
+end
+
+struct xcb_xkb_key_sym_map_iterator_t
+    data::Ptr{xcb_xkb_key_sym_map_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_common_behavior_t
+    type::UInt8
+    data::UInt8
+end
+
+struct xcb_xkb_common_behavior_iterator_t
+    data::Ptr{xcb_xkb_common_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_default_behavior_t
+    type::UInt8
+    pad0::UInt8
+end
+
+struct xcb_xkb_default_behavior_iterator_t
+    data::Ptr{xcb_xkb_default_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_lock_behavior_t
+    type::UInt8
+    pad0::UInt8
+end
+
+struct xcb_xkb_lock_behavior_iterator_t
+    data::Ptr{xcb_xkb_lock_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_radio_group_behavior_t
+    type::UInt8
+    group::UInt8
+end
+
+struct xcb_xkb_radio_group_behavior_iterator_t
+    data::Ptr{xcb_xkb_radio_group_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_overlay_behavior_t
+    type::UInt8
+    key::xcb_keycode_t
+end
+
+struct xcb_xkb_overlay_behavior_iterator_t
+    data::Ptr{xcb_xkb_overlay_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_permament_lock_behavior_t
+    type::UInt8
+    pad0::UInt8
+end
+
+struct xcb_xkb_permament_lock_behavior_iterator_t
+    data::Ptr{xcb_xkb_permament_lock_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_permament_radio_group_behavior_t
+    type::UInt8
+    group::UInt8
+end
+
+struct xcb_xkb_permament_radio_group_behavior_iterator_t
+    data::Ptr{xcb_xkb_permament_radio_group_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_permament_overlay_behavior_t
+    type::UInt8
+    key::xcb_keycode_t
+end
+
+struct xcb_xkb_permament_overlay_behavior_iterator_t
+    data::Ptr{xcb_xkb_permament_overlay_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_behavior_t
+    common::xcb_xkb_common_behavior_t
+end
+
+struct xcb_xkb_behavior_iterator_t
+    data::Ptr{xcb_xkb_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_behavior_type_t::UInt32 begin
+    XCB_XKB_BEHAVIOR_TYPE_DEFAULT = 0
+    XCB_XKB_BEHAVIOR_TYPE_LOCK = 1
+    XCB_XKB_BEHAVIOR_TYPE_RADIO_GROUP = 2
+    XCB_XKB_BEHAVIOR_TYPE_OVERLAY_1 = 3
+    XCB_XKB_BEHAVIOR_TYPE_OVERLAY_2 = 4
+    XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_LOCK = 129
+    XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_RADIO_GROUP = 130
+    XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_OVERLAY_1 = 131
+    XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_OVERLAY_2 = 132
+end
+
+
+struct xcb_xkb_set_behavior_t
+    keycode::xcb_keycode_t
+    behavior::xcb_xkb_behavior_t
+    pad0::UInt8
+end
+
+struct xcb_xkb_set_behavior_iterator_t
+    data::Ptr{xcb_xkb_set_behavior_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_set_explicit_t
+    keycode::xcb_keycode_t
+    explicit::UInt8
+end
+
+struct xcb_xkb_set_explicit_iterator_t
+    data::Ptr{xcb_xkb_set_explicit_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_key_mod_map_t
+    keycode::xcb_keycode_t
+    mods::UInt8
+end
+
+struct xcb_xkb_key_mod_map_iterator_t
+    data::Ptr{xcb_xkb_key_mod_map_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_key_v_mod_map_t
+    keycode::xcb_keycode_t
+    pad0::UInt8
+    vmods::UInt16
+end
+
+struct xcb_xkb_key_v_mod_map_iterator_t
+    data::Ptr{xcb_xkb_key_v_mod_map_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_kt_set_map_entry_t
+    level::UInt8
+    realMods::UInt8
+    virtualMods::UInt16
+end
+
+struct xcb_xkb_kt_set_map_entry_iterator_t
+    data::Ptr{xcb_xkb_kt_set_map_entry_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_set_key_type_t
+    mask::UInt8
+    realMods::UInt8
+    virtualMods::UInt16
+    numLevels::UInt8
+    nMapEntries::UInt8
+    preserve::UInt8
+    pad0::UInt8
+end
+
+struct xcb_xkb_set_key_type_iterator_t
+    data::Ptr{xcb_xkb_set_key_type_t}
+    rem::Cint
+    index::Cint
+end
+
+const xcb_xkb_string8_t = UInt8
+
+struct xcb_xkb_string8_iterator_t
+    data::Ptr{xcb_xkb_string8_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_outline_t
+    nPoints::UInt8
+    cornerRadius::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_outline_iterator_t
+    data::Ptr{xcb_xkb_outline_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_shape_t
+    name::xcb_atom_t
+    nOutlines::UInt8
+    primaryNdx::UInt8
+    approxNdx::UInt8
+    pad0::UInt8
+end
+
+struct xcb_xkb_shape_iterator_t
+    data::Ptr{xcb_xkb_shape_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_key_t
+    name::NTuple{4, xcb_xkb_string8_t}
+    gap::Int16
+    shapeNdx::UInt8
+    colorNdx::UInt8
+end
+
+struct xcb_xkb_key_iterator_t
+    data::Ptr{xcb_xkb_key_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_overlay_key_t
+    over::NTuple{4, xcb_xkb_string8_t}
+    under::NTuple{4, xcb_xkb_string8_t}
+end
+
+struct xcb_xkb_overlay_key_iterator_t
+    data::Ptr{xcb_xkb_overlay_key_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_overlay_row_t
+    rowUnder::UInt8
+    nKeys::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_overlay_row_iterator_t
+    data::Ptr{xcb_xkb_overlay_row_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_overlay_t
+    name::xcb_atom_t
+    nRows::UInt8
+    pad0::NTuple{3, UInt8}
+end
+
+struct xcb_xkb_overlay_iterator_t
+    data::Ptr{xcb_xkb_overlay_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_row_t
+    top::Int16
+    left::Int16
+    nKeys::UInt8
+    vertical::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_row_iterator_t
+    data::Ptr{xcb_xkb_row_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_doodad_type_t::UInt32 begin
+    XCB_XKB_DOODAD_TYPE_OUTLINE = 1
+    XCB_XKB_DOODAD_TYPE_SOLID = 2
+    XCB_XKB_DOODAD_TYPE_TEXT = 3
+    XCB_XKB_DOODAD_TYPE_INDICATOR = 4
+    XCB_XKB_DOODAD_TYPE_LOGO = 5
+end
+
+
+struct xcb_xkb_listing_t
+    flags::UInt16
+    length::UInt16
+end
+
+struct xcb_xkb_listing_iterator_t
+    data::Ptr{xcb_xkb_listing_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_device_led_info_t
+    ledClass::xcb_xkb_led_class_spec_t
+    ledID::xcb_xkb_id_spec_t
+    namesPresent::UInt32
+    mapsPresent::UInt32
+    physIndicators::UInt32
+    state::UInt32
+end
+
+struct xcb_xkb_device_led_info_iterator_t
+    data::Ptr{xcb_xkb_device_led_info_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_error_t::UInt32 begin
+    XCB_XKB_ERROR_BAD_DEVICE = 255
+    XCB_XKB_ERROR_BAD_CLASS = 254
+    XCB_XKB_ERROR_BAD_ID = 253
+end
+
+
+struct xcb_xkb_keyboard_error_t
+    response_type::UInt8
+    error_code::UInt8
+    sequence::UInt16
+    value::UInt32
+    minorOpcode::UInt16
+    majorOpcode::UInt8
+    pad0::NTuple{21, UInt8}
+end
+
+@cenum xcb_xkb_sa_t::UInt32 begin
+    XCB_XKB_SA_CLEAR_LOCKS = 1
+    XCB_XKB_SA_LATCH_TO_LOCK = 2
+    XCB_XKB_SA_USE_MOD_MAP_MODS = 4
+    XCB_XKB_SA_GROUP_ABSOLUTE = 4
+end
+
+@cenum xcb_xkb_sa_type_t::UInt32 begin
+    XCB_XKB_SA_TYPE_NO_ACTION = 0
+    XCB_XKB_SA_TYPE_SET_MODS = 1
+    XCB_XKB_SA_TYPE_LATCH_MODS = 2
+    XCB_XKB_SA_TYPE_LOCK_MODS = 3
+    XCB_XKB_SA_TYPE_SET_GROUP = 4
+    XCB_XKB_SA_TYPE_LATCH_GROUP = 5
+    XCB_XKB_SA_TYPE_LOCK_GROUP = 6
+    XCB_XKB_SA_TYPE_MOVE_PTR = 7
+    XCB_XKB_SA_TYPE_PTR_BTN = 8
+    XCB_XKB_SA_TYPE_LOCK_PTR_BTN = 9
+    XCB_XKB_SA_TYPE_SET_PTR_DFLT = 10
+    XCB_XKB_SA_TYPE_ISO_LOCK = 11
+    XCB_XKB_SA_TYPE_TERMINATE = 12
+    XCB_XKB_SA_TYPE_SWITCH_SCREEN = 13
+    XCB_XKB_SA_TYPE_SET_CONTROLS = 14
+    XCB_XKB_SA_TYPE_LOCK_CONTROLS = 15
+    XCB_XKB_SA_TYPE_ACTION_MESSAGE = 16
+    XCB_XKB_SA_TYPE_REDIRECT_KEY = 17
+    XCB_XKB_SA_TYPE_DEVICE_BTN = 18
+    XCB_XKB_SA_TYPE_LOCK_DEVICE_BTN = 19
+    XCB_XKB_SA_TYPE_DEVICE_VALUATOR = 20
+end
+
+
+struct xcb_xkb_sa_no_action_t
+    type::UInt8
+    pad0::NTuple{7, UInt8}
+end
+
+struct xcb_xkb_sa_no_action_iterator_t
+    data::Ptr{xcb_xkb_sa_no_action_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_set_mods_t
+    type::UInt8
+    flags::UInt8
+    mask::UInt8
+    realMods::UInt8
+    vmodsHigh::UInt8
+    vmodsLow::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_sa_set_mods_iterator_t
+    data::Ptr{xcb_xkb_sa_set_mods_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_latch_mods_t
+    type::UInt8
+    flags::UInt8
+    mask::UInt8
+    realMods::UInt8
+    vmodsHigh::UInt8
+    vmodsLow::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_sa_latch_mods_iterator_t
+    data::Ptr{xcb_xkb_sa_latch_mods_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_lock_mods_t
+    type::UInt8
+    flags::UInt8
+    mask::UInt8
+    realMods::UInt8
+    vmodsHigh::UInt8
+    vmodsLow::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_sa_lock_mods_iterator_t
+    data::Ptr{xcb_xkb_sa_lock_mods_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_set_group_t
+    type::UInt8
+    flags::UInt8
+    group::Int8
+    pad0::NTuple{5, UInt8}
+end
+
+struct xcb_xkb_sa_set_group_iterator_t
+    data::Ptr{xcb_xkb_sa_set_group_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_latch_group_t
+    type::UInt8
+    flags::UInt8
+    group::Int8
+    pad0::NTuple{5, UInt8}
+end
+
+struct xcb_xkb_sa_latch_group_iterator_t
+    data::Ptr{xcb_xkb_sa_latch_group_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_lock_group_t
+    type::UInt8
+    flags::UInt8
+    group::Int8
+    pad0::NTuple{5, UInt8}
+end
+
+struct xcb_xkb_sa_lock_group_iterator_t
+    data::Ptr{xcb_xkb_sa_lock_group_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_sa_move_ptr_flag_t::UInt32 begin
+    XCB_XKB_SA_MOVE_PTR_FLAG_NO_ACCELERATION = 1
+    XCB_XKB_SA_MOVE_PTR_FLAG_MOVE_ABSOLUTE_X = 2
+    XCB_XKB_SA_MOVE_PTR_FLAG_MOVE_ABSOLUTE_Y = 4
+end
+
+
+struct xcb_xkb_sa_move_ptr_t
+    type::UInt8
+    flags::UInt8
+    xHigh::Int8
+    xLow::UInt8
+    yHigh::Int8
+    yLow::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_sa_move_ptr_iterator_t
+    data::Ptr{xcb_xkb_sa_move_ptr_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_ptr_btn_t
+    type::UInt8
+    flags::UInt8
+    count::UInt8
+    button::UInt8
+    pad0::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_sa_ptr_btn_iterator_t
+    data::Ptr{xcb_xkb_sa_ptr_btn_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_lock_ptr_btn_t
+    type::UInt8
+    flags::UInt8
+    pad0::UInt8
+    button::UInt8
+    pad1::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_sa_lock_ptr_btn_iterator_t
+    data::Ptr{xcb_xkb_sa_lock_ptr_btn_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_sa_set_ptr_dflt_flag_t::UInt32 begin
+    XCB_XKB_SA_SET_PTR_DFLT_FLAG_DFLT_BTN_ABSOLUTE = 4
+    XCB_XKB_SA_SET_PTR_DFLT_FLAG_AFFECT_DFLT_BUTTON = 1
+end
+
+
+struct xcb_xkb_sa_set_ptr_dflt_t
+    type::UInt8
+    flags::UInt8
+    affect::UInt8
+    value::Int8
+    pad0::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_sa_set_ptr_dflt_iterator_t
+    data::Ptr{xcb_xkb_sa_set_ptr_dflt_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_sa_iso_lock_flag_t::UInt32 begin
+    XCB_XKB_SA_ISO_LOCK_FLAG_NO_LOCK = 1
+    XCB_XKB_SA_ISO_LOCK_FLAG_NO_UNLOCK = 2
+    XCB_XKB_SA_ISO_LOCK_FLAG_USE_MOD_MAP_MODS = 4
+    XCB_XKB_SA_ISO_LOCK_FLAG_GROUP_ABSOLUTE = 4
+    XCB_XKB_SA_ISO_LOCK_FLAG_ISO_DFLT_IS_GROUP = 8
+end
+
+@cenum xcb_xkb_sa_iso_lock_no_affect_t::UInt32 begin
+    XCB_XKB_SA_ISO_LOCK_NO_AFFECT_CTRLS = 8
+    XCB_XKB_SA_ISO_LOCK_NO_AFFECT_PTR = 16
+    XCB_XKB_SA_ISO_LOCK_NO_AFFECT_GROUP = 32
+    XCB_XKB_SA_ISO_LOCK_NO_AFFECT_MODS = 64
+end
+
+
+struct xcb_xkb_sa_iso_lock_t
+    type::UInt8
+    flags::UInt8
+    mask::UInt8
+    realMods::UInt8
+    group::Int8
+    affect::UInt8
+    vmodsHigh::UInt8
+    vmodsLow::UInt8
+end
+
+struct xcb_xkb_sa_iso_lock_iterator_t
+    data::Ptr{xcb_xkb_sa_iso_lock_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_terminate_t
+    type::UInt8
+    pad0::NTuple{7, UInt8}
+end
+
+struct xcb_xkb_sa_terminate_iterator_t
+    data::Ptr{xcb_xkb_sa_terminate_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_switch_screen_flag_t::UInt32 begin
+    XCB_XKB_SWITCH_SCREEN_FLAG_APPLICATION = 1
+    XCB_XKB_SWITCH_SCREEN_FLAG_ABSOLUTE = 4
+end
+
+
+struct xcb_xkb_sa_switch_screen_t
+    type::UInt8
+    flags::UInt8
+    newScreen::Int8
+    pad0::NTuple{5, UInt8}
+end
+
+struct xcb_xkb_sa_switch_screen_iterator_t
+    data::Ptr{xcb_xkb_sa_switch_screen_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_bool_ctrls_high_t::UInt32 begin
+    XCB_XKB_BOOL_CTRLS_HIGH_ACCESS_X_FEEDBACK = 1
+    XCB_XKB_BOOL_CTRLS_HIGH_AUDIBLE_BELL = 2
+    XCB_XKB_BOOL_CTRLS_HIGH_OVERLAY_1 = 4
+    XCB_XKB_BOOL_CTRLS_HIGH_OVERLAY_2 = 8
+    XCB_XKB_BOOL_CTRLS_HIGH_IGNORE_GROUP_LOCK = 16
+end
+
+@cenum xcb_xkb_bool_ctrls_low_t::UInt32 begin
+    XCB_XKB_BOOL_CTRLS_LOW_REPEAT_KEYS = 1
+    XCB_XKB_BOOL_CTRLS_LOW_SLOW_KEYS = 2
+    XCB_XKB_BOOL_CTRLS_LOW_BOUNCE_KEYS = 4
+    XCB_XKB_BOOL_CTRLS_LOW_STICKY_KEYS = 8
+    XCB_XKB_BOOL_CTRLS_LOW_MOUSE_KEYS = 16
+    XCB_XKB_BOOL_CTRLS_LOW_MOUSE_KEYS_ACCEL = 32
+    XCB_XKB_BOOL_CTRLS_LOW_ACCESS_X_KEYS = 64
+    XCB_XKB_BOOL_CTRLS_LOW_ACCESS_X_TIMEOUT = 128
+end
+
+
+struct xcb_xkb_sa_set_controls_t
+    type::UInt8
+    pad0::NTuple{3, UInt8}
+    boolCtrlsHigh::UInt8
+    boolCtrlsLow::UInt8
+    pad1::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_sa_set_controls_iterator_t
+    data::Ptr{xcb_xkb_sa_set_controls_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_lock_controls_t
+    type::UInt8
+    pad0::NTuple{3, UInt8}
+    boolCtrlsHigh::UInt8
+    boolCtrlsLow::UInt8
+    pad1::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_sa_lock_controls_iterator_t
+    data::Ptr{xcb_xkb_sa_lock_controls_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_action_message_flag_t::UInt32 begin
+    XCB_XKB_ACTION_MESSAGE_FLAG_ON_PRESS = 1
+    XCB_XKB_ACTION_MESSAGE_FLAG_ON_RELEASE = 2
+    XCB_XKB_ACTION_MESSAGE_FLAG_GEN_KEY_EVENT = 4
+end
+
+
+struct xcb_xkb_sa_action_message_t
+    type::UInt8
+    flags::UInt8
+    message::NTuple{6, UInt8}
+end
+
+struct xcb_xkb_sa_action_message_iterator_t
+    data::Ptr{xcb_xkb_sa_action_message_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_redirect_key_t
+    type::UInt8
+    newkey::xcb_keycode_t
+    mask::UInt8
+    realModifiers::UInt8
+    vmodsMaskHigh::UInt8
+    vmodsMaskLow::UInt8
+    vmodsHigh::UInt8
+    vmodsLow::UInt8
+end
+
+struct xcb_xkb_sa_redirect_key_iterator_t
+    data::Ptr{xcb_xkb_sa_redirect_key_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sa_device_btn_t
+    type::UInt8
+    flags::UInt8
+    count::UInt8
+    button::UInt8
+    device::UInt8
+    pad0::NTuple{3, UInt8}
+end
+
+struct xcb_xkb_sa_device_btn_iterator_t
+    data::Ptr{xcb_xkb_sa_device_btn_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_lock_device_flags_t::UInt32 begin
+    XCB_XKB_LOCK_DEVICE_FLAGS_NO_LOCK = 1
+    XCB_XKB_LOCK_DEVICE_FLAGS_NO_UNLOCK = 2
+end
+
+
+struct xcb_xkb_sa_lock_device_btn_t
+    type::UInt8
+    flags::UInt8
+    pad0::UInt8
+    button::UInt8
+    device::UInt8
+    pad1::NTuple{3, UInt8}
+end
+
+struct xcb_xkb_sa_lock_device_btn_iterator_t
+    data::Ptr{xcb_xkb_sa_lock_device_btn_t}
+    rem::Cint
+    index::Cint
+end
+
+@cenum xcb_xkb_sa_val_what_t::UInt32 begin
+    XCB_XKB_SA_VAL_WHAT_IGNORE_VAL = 0
+    XCB_XKB_SA_VAL_WHAT_SET_VAL_MIN = 1
+    XCB_XKB_SA_VAL_WHAT_SET_VAL_CENTER = 2
+    XCB_XKB_SA_VAL_WHAT_SET_VAL_MAX = 3
+    XCB_XKB_SA_VAL_WHAT_SET_VAL_RELATIVE = 4
+    XCB_XKB_SA_VAL_WHAT_SET_VAL_ABSOLUTE = 5
+end
+
+
+struct xcb_xkb_sa_device_valuator_t
+    type::UInt8
+    device::UInt8
+    val1what::UInt8
+    val1index::UInt8
+    val1value::UInt8
+    val2what::UInt8
+    val2index::UInt8
+    val2value::UInt8
+end
+
+struct xcb_xkb_sa_device_valuator_iterator_t
+    data::Ptr{xcb_xkb_sa_device_valuator_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_si_action_t
+    type::UInt8
+    data::NTuple{7, UInt8}
+end
+
+struct xcb_xkb_si_action_iterator_t
+    data::Ptr{xcb_xkb_si_action_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_sym_interpret_t
+    sym::xcb_keysym_t
+    mods::UInt8
+    match::UInt8
+    virtualMod::UInt8
+    flags::UInt8
+    action::xcb_xkb_si_action_t
+end
+
+struct xcb_xkb_sym_interpret_iterator_t
+    data::Ptr{xcb_xkb_sym_interpret_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_action_t
+    noaction::xcb_xkb_sa_no_action_t
+end
+
+struct xcb_xkb_action_iterator_t
+    data::Ptr{xcb_xkb_action_t}
+    rem::Cint
+    index::Cint
+end
+
+struct xcb_xkb_use_extension_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_use_extension_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    wantedMajor::UInt16
+    wantedMinor::UInt16
+end
+
+struct xcb_xkb_use_extension_reply_t
+    response_type::UInt8
+    supported::UInt8
+    sequence::UInt16
+    length::UInt32
+    serverMajor::UInt16
+    serverMinor::UInt16
+    pad0::NTuple{20, UInt8}
+end
+
+struct xcb_xkb_select_events_details_t
+    affectNewKeyboard::UInt16
+    newKeyboardDetails::UInt16
+    affectState::UInt16
+    stateDetails::UInt16
+    affectCtrls::UInt32
+    ctrlDetails::UInt32
+    affectIndicatorState::UInt32
+    indicatorStateDetails::UInt32
+    affectIndicatorMap::UInt32
+    indicatorMapDetails::UInt32
+    affectNames::UInt16
+    namesDetails::UInt16
+    affectCompat::UInt8
+    compatDetails::UInt8
+    affectBell::UInt8
+    bellDetails::UInt8
+    affectMsgDetails::UInt8
+    msgDetails::UInt8
+    affectAccessX::UInt16
+    accessXDetails::UInt16
+    affectExtDev::UInt16
+    extdevDetails::UInt16
+end
+
+struct xcb_xkb_select_events_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    affectWhich::UInt16
+    clear::UInt16
+    selectAll::UInt16
+    affectMap::UInt16
+    map::UInt16
+end
+
+struct xcb_xkb_bell_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    bellClass::xcb_xkb_bell_class_spec_t
+    bellID::xcb_xkb_id_spec_t
+    percent::Int8
+    forceSound::UInt8
+    eventOnly::UInt8
+    pad0::UInt8
+    pitch::Int16
+    duration::Int16
+    pad1::NTuple{2, UInt8}
+    name::xcb_atom_t
+    window::xcb_window_t
+end
+
+struct xcb_xkb_get_state_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_state_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_get_state_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    mods::UInt8
+    baseMods::UInt8
+    latchedMods::UInt8
+    lockedMods::UInt8
+    group::UInt8
+    lockedGroup::UInt8
+    baseGroup::Int16
+    latchedGroup::Int16
+    compatState::UInt8
+    grabMods::UInt8
+    compatGrabMods::UInt8
+    lookupMods::UInt8
+    compatLookupMods::UInt8
+    pad0::UInt8
+    ptrBtnState::UInt16
+    pad1::NTuple{6, UInt8}
+end
+
+struct xcb_xkb_latch_lock_state_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    affectModLocks::UInt8
+    modLocks::UInt8
+    lockGroup::UInt8
+    groupLock::UInt8
+    affectModLatches::UInt8
+    pad0::UInt8
+    pad1::UInt8
+    latchGroup::UInt8
+    groupLatch::UInt16
+end
+
+struct xcb_xkb_get_controls_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_controls_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_get_controls_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    mouseKeysDfltBtn::UInt8
+    numGroups::UInt8
+    groupsWrap::UInt8
+    internalModsMask::UInt8
+    ignoreLockModsMask::UInt8
+    internalModsRealMods::UInt8
+    ignoreLockModsRealMods::UInt8
+    pad0::UInt8
+    internalModsVmods::UInt16
+    ignoreLockModsVmods::UInt16
+    repeatDelay::UInt16
+    repeatInterval::UInt16
+    slowKeysDelay::UInt16
+    debounceDelay::UInt16
+    mouseKeysDelay::UInt16
+    mouseKeysInterval::UInt16
+    mouseKeysTimeToMax::UInt16
+    mouseKeysMaxSpeed::UInt16
+    mouseKeysCurve::Int16
+    accessXOption::UInt16
+    accessXTimeout::UInt16
+    accessXTimeoutOptionsMask::UInt16
+    accessXTimeoutOptionsValues::UInt16
+    pad1::NTuple{2, UInt8}
+    accessXTimeoutMask::UInt32
+    accessXTimeoutValues::UInt32
+    enabledControls::UInt32
+    perKeyRepeat::NTuple{32, UInt8}
+end
+
+struct xcb_xkb_set_controls_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    affectInternalRealMods::UInt8
+    internalRealMods::UInt8
+    affectIgnoreLockRealMods::UInt8
+    ignoreLockRealMods::UInt8
+    affectInternalVirtualMods::UInt16
+    internalVirtualMods::UInt16
+    affectIgnoreLockVirtualMods::UInt16
+    ignoreLockVirtualMods::UInt16
+    mouseKeysDfltBtn::UInt8
+    groupsWrap::UInt8
+    accessXOptions::UInt16
+    pad0::NTuple{2, UInt8}
+    affectEnabledControls::UInt32
+    enabledControls::UInt32
+    changeControls::UInt32
+    repeatDelay::UInt16
+    repeatInterval::UInt16
+    slowKeysDelay::UInt16
+    debounceDelay::UInt16
+    mouseKeysDelay::UInt16
+    mouseKeysInterval::UInt16
+    mouseKeysTimeToMax::UInt16
+    mouseKeysMaxSpeed::UInt16
+    mouseKeysCurve::Int16
+    accessXTimeout::UInt16
+    accessXTimeoutMask::UInt32
+    accessXTimeoutValues::UInt32
+    accessXTimeoutOptionsMask::UInt16
+    accessXTimeoutOptionsValues::UInt16
+    perKeyRepeat::NTuple{32, UInt8}
+end
+
+struct xcb_xkb_get_map_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_map_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    full::UInt16
+    partial::UInt16
+    firstType::UInt8
+    nTypes::UInt8
+    firstKeySym::xcb_keycode_t
+    nKeySyms::UInt8
+    firstKeyAction::xcb_keycode_t
+    nKeyActions::UInt8
+    firstKeyBehavior::xcb_keycode_t
+    nKeyBehaviors::UInt8
+    virtualMods::UInt16
+    firstKeyExplicit::xcb_keycode_t
+    nKeyExplicit::UInt8
+    firstModMapKey::xcb_keycode_t
+    nModMapKeys::UInt8
+    firstVModMapKey::xcb_keycode_t
+    nVModMapKeys::UInt8
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_get_map_map_t
+    types_rtrn::Ptr{xcb_xkb_key_type_t}
+    syms_rtrn::Ptr{xcb_xkb_key_sym_map_t}
+    acts_rtrn_count::Ptr{UInt8}
+    pad2::Ptr{UInt8}
+    acts_rtrn_acts::Ptr{xcb_xkb_action_t}
+    behaviors_rtrn::Ptr{xcb_xkb_set_behavior_t}
+    vmods_rtrn::Ptr{UInt8}
+    pad3::Ptr{UInt8}
+    explicit_rtrn::Ptr{xcb_xkb_set_explicit_t}
+    pad4::Ptr{UInt8}
+    modmap_rtrn::Ptr{xcb_xkb_key_mod_map_t}
+    pad5::Ptr{UInt8}
+    vmodmap_rtrn::Ptr{xcb_xkb_key_v_mod_map_t}
+end
+
+struct xcb_xkb_get_map_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    pad0::NTuple{2, UInt8}
+    minKeyCode::xcb_keycode_t
+    maxKeyCode::xcb_keycode_t
+    present::UInt16
+    firstType::UInt8
+    nTypes::UInt8
+    totalTypes::UInt8
+    firstKeySym::xcb_keycode_t
+    totalSyms::UInt16
+    nKeySyms::UInt8
+    firstKeyAction::xcb_keycode_t
+    totalActions::UInt16
+    nKeyActions::UInt8
+    firstKeyBehavior::xcb_keycode_t
+    nKeyBehaviors::UInt8
+    totalKeyBehaviors::UInt8
+    firstKeyExplicit::xcb_keycode_t
+    nKeyExplicit::UInt8
+    totalKeyExplicit::UInt8
+    firstModMapKey::xcb_keycode_t
+    nModMapKeys::UInt8
+    totalModMapKeys::UInt8
+    firstVModMapKey::xcb_keycode_t
+    nVModMapKeys::UInt8
+    totalVModMapKeys::UInt8
+    pad1::UInt8
+    virtualMods::UInt16
+end
+
+struct xcb_xkb_set_map_values_t
+    types::Ptr{xcb_xkb_set_key_type_t}
+    syms::Ptr{xcb_xkb_key_sym_map_t}
+    actionsCount::Ptr{UInt8}
+    actions::Ptr{xcb_xkb_action_t}
+    behaviors::Ptr{xcb_xkb_set_behavior_t}
+    vmods::Ptr{UInt8}
+    explicit::Ptr{xcb_xkb_set_explicit_t}
+    modmap::Ptr{xcb_xkb_key_mod_map_t}
+    vmodmap::Ptr{xcb_xkb_key_v_mod_map_t}
+end
+
+struct xcb_xkb_set_map_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    present::UInt16
+    flags::UInt16
+    minKeyCode::xcb_keycode_t
+    maxKeyCode::xcb_keycode_t
+    firstType::UInt8
+    nTypes::UInt8
+    firstKeySym::xcb_keycode_t
+    nKeySyms::UInt8
+    totalSyms::UInt16
+    firstKeyAction::xcb_keycode_t
+    nKeyActions::UInt8
+    totalActions::UInt16
+    firstKeyBehavior::xcb_keycode_t
+    nKeyBehaviors::UInt8
+    totalKeyBehaviors::UInt8
+    firstKeyExplicit::xcb_keycode_t
+    nKeyExplicit::UInt8
+    totalKeyExplicit::UInt8
+    firstModMapKey::xcb_keycode_t
+    nModMapKeys::UInt8
+    totalModMapKeys::UInt8
+    firstVModMapKey::xcb_keycode_t
+    nVModMapKeys::UInt8
+    totalVModMapKeys::UInt8
+    virtualMods::UInt16
+end
+
+struct xcb_xkb_get_compat_map_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_compat_map_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    groups::UInt8
+    getAllSI::UInt8
+    firstSI::UInt16
+    nSI::UInt16
+end
+
+struct xcb_xkb_get_compat_map_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    groupsRtrn::UInt8
+    pad0::UInt8
+    firstSIRtrn::UInt16
+    nSIRtrn::UInt16
+    nTotalSI::UInt16
+    pad1::NTuple{16, UInt8}
+end
+
+struct xcb_xkb_set_compat_map_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::UInt8
+    recomputeActions::UInt8
+    truncateSI::UInt8
+    groups::UInt8
+    firstSI::UInt16
+    nSI::UInt16
+    pad1::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_get_indicator_state_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_indicator_state_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_get_indicator_state_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    state::UInt32
+    pad0::NTuple{20, UInt8}
+end
+
+struct xcb_xkb_get_indicator_map_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_indicator_map_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::NTuple{2, UInt8}
+    which::UInt32
+end
+
+struct xcb_xkb_get_indicator_map_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    which::UInt32
+    realIndicators::UInt32
+    nIndicators::UInt8
+    pad0::NTuple{15, UInt8}
+end
+
+struct xcb_xkb_set_indicator_map_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::NTuple{2, UInt8}
+    which::UInt32
+end
+
+struct xcb_xkb_get_named_indicator_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_named_indicator_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    ledClass::xcb_xkb_led_class_spec_t
+    ledID::xcb_xkb_id_spec_t
+    pad0::NTuple{2, UInt8}
+    indicator::xcb_atom_t
+end
+
+struct xcb_xkb_get_named_indicator_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    indicator::xcb_atom_t
+    found::UInt8
+    on::UInt8
+    realIndicator::UInt8
+    ndx::UInt8
+    map_flags::UInt8
+    map_whichGroups::UInt8
+    map_groups::UInt8
+    map_whichMods::UInt8
+    map_mods::UInt8
+    map_realMods::UInt8
+    map_vmod::UInt16
+    map_ctrls::UInt32
+    supported::UInt8
+    pad0::NTuple{3, UInt8}
+end
+
+struct xcb_xkb_set_named_indicator_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    ledClass::xcb_xkb_led_class_spec_t
+    ledID::xcb_xkb_id_spec_t
+    pad0::NTuple{2, UInt8}
+    indicator::xcb_atom_t
+    setState::UInt8
+    on::UInt8
+    setMap::UInt8
+    createMap::UInt8
+    pad1::UInt8
+    map_flags::UInt8
+    map_whichGroups::UInt8
+    map_groups::UInt8
+    map_whichMods::UInt8
+    map_realMods::UInt8
+    map_vmods::UInt16
+    map_ctrls::UInt32
+end
+
+struct xcb_xkb_get_names_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_names_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::NTuple{2, UInt8}
+    which::UInt32
+end
+
+struct xcb_xkb_get_names_value_list_t
+    keycodesName::xcb_atom_t
+    geometryName::xcb_atom_t
+    symbolsName::xcb_atom_t
+    physSymbolsName::xcb_atom_t
+    typesName::xcb_atom_t
+    compatName::xcb_atom_t
+    typeNames::Ptr{xcb_atom_t}
+    nLevelsPerType::Ptr{UInt8}
+    pad1::Ptr{UInt8}
+    ktLevelNames::Ptr{xcb_atom_t}
+    indicatorNames::Ptr{xcb_atom_t}
+    virtualModNames::Ptr{xcb_atom_t}
+    groups::Ptr{xcb_atom_t}
+    keyNames::Ptr{xcb_xkb_key_name_t}
+    keyAliases::Ptr{xcb_xkb_key_alias_t}
+    radioGroupNames::Ptr{xcb_atom_t}
+end
+
+struct xcb_xkb_get_names_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    which::UInt32
+    minKeyCode::xcb_keycode_t
+    maxKeyCode::xcb_keycode_t
+    nTypes::UInt8
+    groupNames::UInt8
+    virtualMods::UInt16
+    firstKey::xcb_keycode_t
+    nKeys::UInt8
+    indicators::UInt32
+    nRadioGroups::UInt8
+    nKeyAliases::UInt8
+    nKTLevels::UInt16
+    pad0::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_set_names_values_t
+    keycodesName::xcb_atom_t
+    geometryName::xcb_atom_t
+    symbolsName::xcb_atom_t
+    physSymbolsName::xcb_atom_t
+    typesName::xcb_atom_t
+    compatName::xcb_atom_t
+    typeNames::Ptr{xcb_atom_t}
+    nLevelsPerType::Ptr{UInt8}
+    ktLevelNames::Ptr{xcb_atom_t}
+    indicatorNames::Ptr{xcb_atom_t}
+    virtualModNames::Ptr{xcb_atom_t}
+    groups::Ptr{xcb_atom_t}
+    keyNames::Ptr{xcb_xkb_key_name_t}
+    keyAliases::Ptr{xcb_xkb_key_alias_t}
+    radioGroupNames::Ptr{xcb_atom_t}
+end
+
+struct xcb_xkb_set_names_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    virtualMods::UInt16
+    which::UInt32
+    firstType::UInt8
+    nTypes::UInt8
+    firstKTLevelt::UInt8
+    nKTLevels::UInt8
+    indicators::UInt32
+    groupNames::UInt8
+    nRadioGroups::UInt8
+    firstKey::xcb_keycode_t
+    nKeys::UInt8
+    nKeyAliases::UInt8
+    pad0::UInt8
+    totalKTLevelNames::UInt16
+end
+
+struct xcb_xkb_per_client_flags_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_per_client_flags_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    pad0::NTuple{2, UInt8}
+    change::UInt32
+    value::UInt32
+    ctrlsToChange::UInt32
+    autoCtrls::UInt32
+    autoCtrlsValues::UInt32
+end
+
+struct xcb_xkb_per_client_flags_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    supported::UInt32
+    value::UInt32
+    autoCtrls::UInt32
+    autoCtrlsValues::UInt32
+    pad0::NTuple{8, UInt8}
+end
+
+struct xcb_xkb_list_components_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_list_components_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    maxNames::UInt16
+end
+
+struct xcb_xkb_list_components_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    nKeymaps::UInt16
+    nKeycodes::UInt16
+    nTypes::UInt16
+    nCompatMaps::UInt16
+    nSymbols::UInt16
+    nGeometries::UInt16
+    extra::UInt16
+    pad0::NTuple{10, UInt8}
+end
+
+struct xcb_xkb_get_kbd_by_name_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_kbd_by_name_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    need::UInt16
+    want::UInt16
+    load::UInt8
+    pad0::UInt8
+end
+
+struct xcb_xkb_get_kbd_by_name_replies_types_map_t
+    types_rtrn::Ptr{xcb_xkb_key_type_t}
+    syms_rtrn::Ptr{xcb_xkb_key_sym_map_t}
+    acts_rtrn_count::Ptr{UInt8}
+    acts_rtrn_acts::Ptr{xcb_xkb_action_t}
+    behaviors_rtrn::Ptr{xcb_xkb_set_behavior_t}
+    vmods_rtrn::Ptr{UInt8}
+    explicit_rtrn::Ptr{xcb_xkb_set_explicit_t}
+    modmap_rtrn::Ptr{xcb_xkb_key_mod_map_t}
+    vmodmap_rtrn::Ptr{xcb_xkb_key_v_mod_map_t}
+end
+
+struct xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t
+    keycodesName::xcb_atom_t
+    geometryName::xcb_atom_t
+    symbolsName::xcb_atom_t
+    physSymbolsName::xcb_atom_t
+    typesName::xcb_atom_t
+    compatName::xcb_atom_t
+    typeNames::Ptr{xcb_atom_t}
+    nLevelsPerType::Ptr{UInt8}
+    ktLevelNames::Ptr{xcb_atom_t}
+    indicatorNames::Ptr{xcb_atom_t}
+    virtualModNames::Ptr{xcb_atom_t}
+    groups::Ptr{xcb_atom_t}
+    keyNames::Ptr{xcb_xkb_key_name_t}
+    keyAliases::Ptr{xcb_xkb_key_alias_t}
+    radioGroupNames::Ptr{xcb_atom_t}
+end
+
+struct ANONYMOUS1_types
+    getmap_type::UInt8
+    typeDeviceID::UInt8
+    getmap_sequence::UInt16
+    getmap_length::UInt32
+    pad1::NTuple{2, UInt8}
+    typeMinKeyCode::xcb_keycode_t
+    typeMaxKeyCode::xcb_keycode_t
+    present::UInt16
+    firstType::UInt8
+    nTypes::UInt8
+    totalTypes::UInt8
+    firstKeySym::xcb_keycode_t
+    totalSyms::UInt16
+    nKeySyms::UInt8
+    firstKeyAction::xcb_keycode_t
+    totalActions::UInt16
+    nKeyActions::UInt8
+    firstKeyBehavior::xcb_keycode_t
+    nKeyBehaviors::UInt8
+    totalKeyBehaviors::UInt8
+    firstKeyExplicit::xcb_keycode_t
+    nKeyExplicit::UInt8
+    totalKeyExplicit::UInt8
+    firstModMapKey::xcb_keycode_t
+    nModMapKeys::UInt8
+    totalModMapKeys::UInt8
+    firstVModMapKey::xcb_keycode_t
+    nVModMapKeys::UInt8
+    totalVModMapKeys::UInt8
+    pad2::UInt8
+    virtualMods::UInt16
+    map::xcb_xkb_get_kbd_by_name_replies_types_map_t
+end
+
+struct ANONYMOUS2_compat_map
+    compatmap_type::UInt8
+    compatDeviceID::UInt8
+    compatmap_sequence::UInt16
+    compatmap_length::UInt32
+    groupsRtrn::UInt8
+    pad7::UInt8
+    firstSIRtrn::UInt16
+    nSIRtrn::UInt16
+    nTotalSI::UInt16
+    pad8::NTuple{16, UInt8}
+    si_rtrn::Ptr{xcb_xkb_sym_interpret_t}
+    group_rtrn::Ptr{xcb_xkb_mod_def_t}
+end
+
+struct ANONYMOUS3_indicator_maps
+    indicatormap_type::UInt8
+    indicatorDeviceID::UInt8
+    indicatormap_sequence::UInt16
+    indicatormap_length::UInt32
+    which::UInt32
+    realIndicators::UInt32
+    nIndicators::UInt8
+    pad9::NTuple{15, UInt8}
+    maps::Ptr{xcb_xkb_indicator_map_t}
+end
+
+struct ANONYMOUS4_key_names
+    keyname_type::UInt8
+    keyDeviceID::UInt8
+    keyname_sequence::UInt16
+    keyname_length::UInt32
+    which::UInt32
+    keyMinKeyCode::xcb_keycode_t
+    keyMaxKeyCode::xcb_keycode_t
+    nTypes::UInt8
+    groupNames::UInt8
+    virtualMods::UInt16
+    firstKey::xcb_keycode_t
+    nKeys::UInt8
+    indicators::UInt32
+    nRadioGroups::UInt8
+    nKeyAliases::UInt8
+    nKTLevels::UInt16
+    pad10::NTuple{4, UInt8}
+    valueList::xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t
+end
+
+struct ANONYMOUS5_geometry
+    geometry_type::UInt8
+    geometryDeviceID::UInt8
+    geometry_sequence::UInt16
+    geometry_length::UInt32
+    name::xcb_atom_t
+    geometryFound::UInt8
+    pad12::UInt8
+    widthMM::UInt16
+    heightMM::UInt16
+    nProperties::UInt16
+    nColors::UInt16
+    nShapes::UInt16
+    nSections::UInt16
+    nDoodads::UInt16
+    nKeyAliases::UInt16
+    baseColorNdx::UInt8
+    labelColorNdx::UInt8
+    labelFont::Ptr{xcb_xkb_counted_string_16_t}
+end
+
+struct xcb_xkb_get_kbd_by_name_replies_t
+    types::ANONYMOUS1_types
+    compat_map::ANONYMOUS2_compat_map
+    indicator_maps::ANONYMOUS3_indicator_maps
+    key_names::ANONYMOUS4_key_names
+    geometry::ANONYMOUS5_geometry
+end
+
+struct xcb_xkb_get_kbd_by_name_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    minKeyCode::xcb_keycode_t
+    maxKeyCode::xcb_keycode_t
+    loaded::UInt8
+    newKeyboard::UInt8
+    found::UInt16
+    reported::UInt16
+    pad0::NTuple{16, UInt8}
+end
+
+struct xcb_xkb_get_device_info_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_get_device_info_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    wanted::UInt16
+    allButtons::UInt8
+    firstButton::UInt8
+    nButtons::UInt8
+    pad0::UInt8
+    ledClass::xcb_xkb_led_class_spec_t
+    ledID::xcb_xkb_id_spec_t
+end
+
+struct xcb_xkb_get_device_info_reply_t
+    response_type::UInt8
+    deviceID::UInt8
+    sequence::UInt16
+    length::UInt32
+    present::UInt16
+    supported::UInt16
+    unsupported::UInt16
+    nDeviceLedFBs::UInt16
+    firstBtnWanted::UInt8
+    nBtnsWanted::UInt8
+    firstBtnRtrn::UInt8
+    nBtnsRtrn::UInt8
+    totalBtns::UInt8
+    hasOwnState::UInt8
+    dfltKbdFB::UInt16
+    dfltLedFB::UInt16
+    pad0::NTuple{2, UInt8}
+    devType::xcb_atom_t
+    nameLen::UInt16
+end
+
+struct xcb_xkb_set_device_info_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    deviceSpec::xcb_xkb_device_spec_t
+    firstBtn::UInt8
+    nBtns::UInt8
+    change::UInt16
+    nDeviceLedFBs::UInt16
+end
+
+struct xcb_xkb_set_debugging_flags_cookie_t
+    sequence::UInt32
+end
+
+struct xcb_xkb_set_debugging_flags_request_t
+    major_opcode::UInt8
+    minor_opcode::UInt8
+    length::UInt16
+    msgLength::UInt16
+    pad0::NTuple{2, UInt8}
+    affectFlags::UInt32
+    flags::UInt32
+    affectCtrls::UInt32
+    ctrls::UInt32
+end
+
+struct xcb_xkb_set_debugging_flags_reply_t
+    response_type::UInt8
+    pad0::UInt8
+    sequence::UInt16
+    length::UInt32
+    currentFlags::UInt32
+    currentCtrls::UInt32
+    supportedFlags::UInt32
+    supportedCtrls::UInt32
+    pad1::NTuple{8, UInt8}
+end
+
+struct xcb_xkb_new_keyboard_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    oldDeviceID::UInt8
+    minKeyCode::xcb_keycode_t
+    maxKeyCode::xcb_keycode_t
+    oldMinKeyCode::xcb_keycode_t
+    oldMaxKeyCode::xcb_keycode_t
+    requestMajor::UInt8
+    requestMinor::UInt8
+    changed::UInt16
+    pad0::NTuple{14, UInt8}
+end
+
+struct xcb_xkb_map_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    ptrBtnActions::UInt8
+    changed::UInt16
+    minKeyCode::xcb_keycode_t
+    maxKeyCode::xcb_keycode_t
+    firstType::UInt8
+    nTypes::UInt8
+    firstKeySym::xcb_keycode_t
+    nKeySyms::UInt8
+    firstKeyAct::xcb_keycode_t
+    nKeyActs::UInt8
+    firstKeyBehavior::xcb_keycode_t
+    nKeyBehavior::UInt8
+    firstKeyExplicit::xcb_keycode_t
+    nKeyExplicit::UInt8
+    firstModMapKey::xcb_keycode_t
+    nModMapKeys::UInt8
+    firstVModMapKey::xcb_keycode_t
+    nVModMapKeys::UInt8
+    virtualMods::UInt16
+    pad0::NTuple{2, UInt8}
+end
+
+struct xcb_xkb_state_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    mods::UInt8
+    baseMods::UInt8
+    latchedMods::UInt8
+    lockedMods::UInt8
+    group::UInt8
+    baseGroup::Int16
+    latchedGroup::Int16
+    lockedGroup::UInt8
+    compatState::UInt8
+    grabMods::UInt8
+    compatGrabMods::UInt8
+    lookupMods::UInt8
+    compatLoockupMods::UInt8
+    ptrBtnState::UInt16
+    changed::UInt16
+    keycode::xcb_keycode_t
+    eventType::UInt8
+    requestMajor::UInt8
+    requestMinor::UInt8
+end
+
+struct xcb_xkb_controls_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    numGroups::UInt8
+    pad0::NTuple{2, UInt8}
+    changedControls::UInt32
+    enabledControls::UInt32
+    enabledControlChanges::UInt32
+    keycode::xcb_keycode_t
+    eventType::UInt8
+    requestMajor::UInt8
+    requestMinor::UInt8
+    pad1::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_indicator_state_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    pad0::NTuple{3, UInt8}
+    state::UInt32
+    stateChanged::UInt32
+    pad1::NTuple{12, UInt8}
+end
+
+struct xcb_xkb_indicator_map_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    pad0::NTuple{3, UInt8}
+    state::UInt32
+    mapChanged::UInt32
+    pad1::NTuple{12, UInt8}
+end
+
+struct xcb_xkb_names_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    pad0::UInt8
+    changed::UInt16
+    firstType::UInt8
+    nTypes::UInt8
+    firstLevelName::UInt8
+    nLevelNames::UInt8
+    pad1::UInt8
+    nRadioGroups::UInt8
+    nKeyAliases::UInt8
+    changedGroupNames::UInt8
+    changedVirtualMods::UInt16
+    firstKey::xcb_keycode_t
+    nKeys::UInt8
+    changedIndicators::UInt32
+    pad2::NTuple{4, UInt8}
+end
+
+struct xcb_xkb_compat_map_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    changedGroups::UInt8
+    firstSI::UInt16
+    nSI::UInt16
+    nTotalSI::UInt16
+    pad0::NTuple{16, UInt8}
+end
+
+struct xcb_xkb_bell_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    bellClass::UInt8
+    bellID::UInt8
+    percent::UInt8
+    pitch::UInt16
+    duration::UInt16
+    name::xcb_atom_t
+    window::xcb_window_t
+    eventOnly::UInt8
+    pad0::NTuple{7, UInt8}
+end
+
+struct xcb_xkb_action_message_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    keycode::xcb_keycode_t
+    press::UInt8
+    keyEventFollows::UInt8
+    mods::UInt8
+    group::UInt8
+    message::NTuple{8, xcb_xkb_string8_t}
+    pad0::NTuple{10, UInt8}
+end
+
+struct xcb_xkb_access_x_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    keycode::xcb_keycode_t
+    detailt::UInt16
+    slowKeysDelay::UInt16
+    debounceDelay::UInt16
+    pad0::NTuple{16, UInt8}
+end
+
+struct xcb_xkb_extension_device_notify_event_t
+    response_type::UInt8
+    xkbType::UInt8
+    sequence::UInt16
+    time::xcb_timestamp_t
+    deviceID::UInt8
+    pad0::UInt8
+    reason::UInt16
+    ledClass::UInt16
+    ledID::UInt16
+    ledsDefined::UInt32
+    ledState::UInt32
+    firstButton::UInt8
+    nButtons::UInt8
+    supported::UInt16
+    unsupported::UInt16
+    pad1::NTuple{2, UInt8}
+end
