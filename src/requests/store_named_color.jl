@@ -1,4 +1,4 @@
-function store_named_color(
+function xcb_store_named_color(
 	conn:: XCBConnection,
 	flags:: Integer,
 	colormap:: Integer,

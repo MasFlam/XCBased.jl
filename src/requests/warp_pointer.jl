@@ -1,4 +1,4 @@
-function warp_pointer(
+function xcb_warp_pointer(
 	conn:: XCBConnection,
 	src_window:: Integer,
 	dst_window:: Integer,

@@ -1,4 +1,4 @@
-function set_dashes(
+function xcb_set_dashes(
 	conn:: XCBConnection,
 	gc:: Integer,
 	dash_offset:: Integer,

@@ -1,4 +1,4 @@
-function rotate_properties(
+function xcb_rotate_properties(
 	conn:: XCBConnection,
 	window:: Integer,
 	delta:: Integer,

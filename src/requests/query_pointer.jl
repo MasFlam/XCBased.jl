@@ -1,4 +1,4 @@
-function query_pointer(
+function xcb_query_pointer(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool

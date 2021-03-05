@@ -1,4 +1,4 @@
-function set_clip_rectangles(
+function xcb_set_clip_rectangles(
 	conn:: XCBConnection,
 	ordering:: Integer,
 	gc:: Integer,

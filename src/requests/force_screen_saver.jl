@@ -1,4 +1,4 @@
-function force_screen_saver(
+function xcb_force_screen_saver(
 	conn:: XCBConnection,
 	mode:: Integer;
 	checked:: Bool

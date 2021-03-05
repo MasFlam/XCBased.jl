@@ -1,4 +1,4 @@
-function get_image(
+function xcb_get_image(
 	conn:: XCBConnection,
 	format:: Integer,
 	drawable:: Integer,

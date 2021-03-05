@@ -1,4 +1,4 @@
-function grab_server(
+function xcb_grab_server(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBVoidFuture

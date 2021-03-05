@@ -1,4 +1,4 @@
-function change_hosts(
+function xcb_change_hosts(
 	conn:: XCBConnection,
 	mode:: Integer,
 	family:: Integer,

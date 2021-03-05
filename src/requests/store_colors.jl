@@ -1,4 +1,4 @@
-function store_colors(
+function xcb_store_colors(
 	conn:: XCBConnection,
 	colormap:: Integer,
 	items:: Vector{LibXCB.xcb_coloritem_t};

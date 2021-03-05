@@ -1,4 +1,4 @@
-function copy_area(
+function xcb_copy_area(
 	conn:: XCBConnection,
 	src_drawable:: Integer,
 	dst_drawable:: Integer,

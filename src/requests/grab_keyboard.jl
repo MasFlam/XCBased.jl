@@ -1,4 +1,4 @@
-function grab_keyboard(
+function xcb_grab_keyboard(
 	conn:: XCBConnection,
 	owner_events:: Bool,
 	grab_window:: Integer,

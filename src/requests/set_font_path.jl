@@ -1,5 +1,4 @@
-# this was a bitch
-function set_font_path(
+function xcb_set_font_path(
 	conn:: XCBConnection,
 	font_paths:: AbstractVector{<:AbstractString};
 	checked:: Bool

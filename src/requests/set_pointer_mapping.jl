@@ -1,4 +1,4 @@
-function set_pointer_mapping(
+function xcb_set_pointer_mapping(
 	conn:: XCBConnection,
 	map:: Vector{UInt8};
 	checked:: Bool

@@ -1,4 +1,4 @@
-function change_keyboard_control(
+function xcb_change_keyboard_control(
 	conn:: XCBConnection;
 	checked:: Bool,
 	key_click_percent:: Union{Integer, Nothing} = nothing,

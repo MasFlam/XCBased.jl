@@ -1,4 +1,4 @@
-function get_geometry(
+function xcb_get_geometry(
 	conn:: XCBConnection,
 	drawable:: Integer;
 	checked:: Bool

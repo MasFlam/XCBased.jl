@@ -1,4 +1,4 @@
-function set_modifier_mapping(
+function xcb_set_modifier_mapping(
 	conn:: XCBConnection,
 	keycodes_per_modifier:: Integer,
 	keycodes:: NTuple{8, Vector{LibXCB.xcb_keycode_t}};

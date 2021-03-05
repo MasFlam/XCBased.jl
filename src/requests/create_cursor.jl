@@ -1,4 +1,4 @@
-function create_cursor(
+function xcb_create_cursor(
 	conn:: XCBConnection,
 	cursor:: Integer,
 	source:: Integer,

@@ -1,4 +1,4 @@
-function change_save_set(
+function xcb_change_save_set(
 	conn:: XCBConnection,
 	mode:: Integer,
 	window:: Integer;

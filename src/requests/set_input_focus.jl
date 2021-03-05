@@ -1,4 +1,4 @@
-function set_input_focus(
+function xcb_set_input_focus(
 	conn:: XCBConnection,
 	revert_to:: Integer,
 	focus:: Integer,

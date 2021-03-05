@@ -1,4 +1,4 @@
-function create_colormap(
+function xcb_create_colormap(
 	conn:: XCBConnection,
 	alloc:: Integer,
 	colormap:: Integer,

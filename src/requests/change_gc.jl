@@ -1,4 +1,4 @@
-function change_gc(
+function xcb_change_gc(
 	conn:: XCBConnection,
 	gc:: Integer,
 	drawable:: Integer;

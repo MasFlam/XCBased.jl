@@ -1,4 +1,4 @@
-function poly_segment(
+function xcb_poly_segment(
 	conn:: XCBConnection,
 	drawable:: Integer,
 	gc:: Integer,

@@ -1,4 +1,4 @@
-function query_colors(
+function xcb_query_colors(
 	conn:: XCBConnection,
 	colormap:: Integer,
 	pixels:: Vector{UInt32};

@@ -1,4 +1,4 @@
-function list_properties(
+function xcb_list_properties(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool

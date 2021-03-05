@@ -1,4 +1,4 @@
-function lookup_color(
+function xcb_lookup_color(
 	conn:: XCBConnection,
 	colormap:: Integer,
 	name:: AbstractString;

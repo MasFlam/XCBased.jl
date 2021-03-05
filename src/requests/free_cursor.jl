@@ -1,4 +1,4 @@
-function free_cursor(
+function xcb_free_cursor(
 	conn:: XCBConnection,
 	cursor:: Integer;
 	checked:: Bool

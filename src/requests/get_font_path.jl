@@ -1,4 +1,4 @@
-function get_font_path(
+function xcb_get_font_path(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBGetFontPathFuture

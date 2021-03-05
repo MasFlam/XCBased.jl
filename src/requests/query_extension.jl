@@ -1,4 +1,4 @@
-function query_extension(
+function xcb_query_extension(
 	conn:: XCBConnection,
 	name:: AbstractString;
 	checked:: Bool

@@ -1,4 +1,4 @@
-function circulate_windows(
+function xcb_circulate_windows(
 	conn:: XCBConnection,
 	direction:: Integer,
 	window:: Integer;

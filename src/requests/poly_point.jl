@@ -1,4 +1,4 @@
-function poly_point(
+function xcb_poly_point(
 	conn:: XCBConnection,
 	coordinate_mode:: Integer,
 	drawable:: Integer,

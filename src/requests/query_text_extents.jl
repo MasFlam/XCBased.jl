@@ -1,4 +1,4 @@
-function query_text_extents(
+function xcb_query_text_extents(
 	conn:: XCBConnection,
 	fontable:: Integer,
 	string:: Vector{LibXCB.xcb_char2b_t};

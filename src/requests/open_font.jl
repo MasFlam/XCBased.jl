@@ -1,4 +1,4 @@
-function open_font(
+function xcb_open_font(
 	conn:: XCBConnection,
 	font:: Integer,
 	name:: AbstractString;

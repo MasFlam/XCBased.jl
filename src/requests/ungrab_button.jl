@@ -1,4 +1,4 @@
-function ungrab_button(
+function xcb_ungrab_button(
 	conn:: XCBConnection,
 	button:: Integer,
 	grab_window:: Integer,

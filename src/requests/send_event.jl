@@ -1,4 +1,4 @@
-function send_event(
+function xcb_send_event(
 	conn:: XCBConnection,
 	propagate:: Bool,
 	destination:: Integer,

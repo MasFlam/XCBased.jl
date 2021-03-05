@@ -1,4 +1,4 @@
-function bell(
+function xcb_bell(
 	conn:: XCBConnection,
 	percent:: Integer;
 	checked:: Bool

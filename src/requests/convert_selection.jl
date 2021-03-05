@@ -1,4 +1,4 @@
-function convert_selection(
+function xcb_convert_selection(
 	conn:: XCBConnection,
 	requestor:: Integer,
 	selection:: Integer,

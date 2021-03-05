@@ -1,4 +1,4 @@
-function close_font(
+function xcb_close_font(
 	conn:: XCBConnection,
 	font:: Integer;
 	checked:: Bool

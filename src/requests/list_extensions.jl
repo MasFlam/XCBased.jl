@@ -1,4 +1,4 @@
-function list_extensions(
+function xcb_list_extensions(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBListExtensionsFuture

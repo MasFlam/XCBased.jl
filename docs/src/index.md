@@ -27,8 +27,8 @@ get_maximum_request_length
 
 # Requests
 Requests are made using functions with names being the request names from the X standard, converted
-from PascalCase to snake\_case. For example, the `CreateWindow` request is sent using the
-`create_window` function. The request functions return futures.
+from PascalCase to snake\_case, prefixed with `xcb_`. For example, the `CreateWindow` request is
+sent using the `xcb_create_window` function. The request functions return futures.
 
 # Futures
 Futures are named `XCBXXXFuture`, where `XXX` is a PascalCase name of the corresponding request.

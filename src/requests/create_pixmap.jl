@@ -1,4 +1,4 @@
-function create_pixmap(
+function xcb_create_pixmap(
 	conn:: XCBConnection,
 	depth:: Integer,
 	pixmap:: Integer,

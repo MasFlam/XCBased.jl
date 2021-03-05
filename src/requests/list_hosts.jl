@@ -1,4 +1,4 @@
-function list_hosts(
+function xcb_list_hosts(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBListHostsFuture

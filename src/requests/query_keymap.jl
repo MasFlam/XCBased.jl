@@ -1,4 +1,4 @@
-function query_keymap(
+function xcb_query_keymap(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBQueryKeymapFuture

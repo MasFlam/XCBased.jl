@@ -1,4 +1,4 @@
-function query_tree(
+function xcb_query_tree(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool

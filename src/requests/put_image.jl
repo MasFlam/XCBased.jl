@@ -1,4 +1,4 @@
-function put_image(
+function xcb_put_image(
 	conn:: XCBConnection,
 	format:: Integer,
 	drawable:: Integer,

@@ -1,4 +1,4 @@
-function no_operation(
+function xcb_no_operation(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBVoidFuture

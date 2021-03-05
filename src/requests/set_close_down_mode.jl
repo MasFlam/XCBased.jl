@@ -1,4 +1,4 @@
-function set_close_down_mode(
+function xcb_set_close_down_mode(
 	conn:: XCBConnection,
 	mode:: Integer;
 	checked:: Bool

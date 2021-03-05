@@ -1,4 +1,4 @@
-function change_active_pointer_grab(
+function xcb_change_active_pointer_grab(
 	conn:: XCBConnection,
 	cursor:: Integer,
 	time:: Integer,

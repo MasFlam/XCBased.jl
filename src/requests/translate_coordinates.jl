@@ -1,4 +1,4 @@
-function translate_coordinates(
+function xcb_translate_coordinates(
 	conn:: XCBConnection,
 	src_window:: Integer,
 	dst_window:: Integer,

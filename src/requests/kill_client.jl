@@ -1,4 +1,4 @@
-function kill_client(
+function xcb_kill_client(
 	conn:: XCBConnection,
 	resource:: Integer;
 	checked:: Bool

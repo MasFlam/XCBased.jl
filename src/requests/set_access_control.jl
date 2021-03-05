@@ -1,4 +1,4 @@
-function set_access_control(
+function xcb_set_access_control(
 	conn:: XCBConnection,
 	mode:: Integer;
 	checked:: Bool

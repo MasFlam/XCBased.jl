@@ -1,4 +1,4 @@
-function destroy_subwindows(
+function xcb_destroy_subwindows(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool

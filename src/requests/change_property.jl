@@ -1,4 +1,4 @@
-function change_property(
+function xcb_change_property(
 	conn:: XCBConnection,
 	mode:: Integer,
 	window:: Integer,

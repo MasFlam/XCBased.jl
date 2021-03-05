@@ -1,4 +1,4 @@
-function set_selection_owner(
+function xcb_set_selection_owner(
 	conn:: XCBConnection,
 	owner:: Integer,
 	selection:: Integer,

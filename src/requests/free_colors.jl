@@ -1,4 +1,4 @@
-function free_colors(
+function xcb_free_colors(
 	conn:: XCBConnection,
 	colormap:: Integer,
 	plane_mask:: Integer,

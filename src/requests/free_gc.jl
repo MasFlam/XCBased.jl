@@ -1,4 +1,4 @@
-function free_gc(
+function xcb_free_gc(
 	conn:: XCBConnection,
 	gc:: Integer;
 	checked:: Bool

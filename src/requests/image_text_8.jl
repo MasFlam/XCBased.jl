@@ -1,4 +1,4 @@
-function image_text_8(
+function xcb_image_text_8(
 	conn:: XCBConnection,
 	drawable:: Integer,
 	gc:: Integer,

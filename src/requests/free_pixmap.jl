@@ -1,4 +1,4 @@
-function free_pixmap(
+function xcb_free_pixmap(
 	conn:: XCBConnection,
 	pixmap:: Integer;
 	checked:: Bool

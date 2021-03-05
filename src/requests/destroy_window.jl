@@ -1,4 +1,4 @@
-function destroy_window(
+function xcb_destroy_window(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool

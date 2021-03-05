@@ -1,4 +1,4 @@
-function list_fonts(
+function xcb_list_fonts(
 	conn:: XCBConnection,
 	max_names:: Integer,
 	pattern:: AbstractString;

@@ -1,4 +1,4 @@
-function query_font(
+function xcb_query_font(
 	conn:: XCBConnection,
 	fontable:: Integer;
 	checked:: Bool

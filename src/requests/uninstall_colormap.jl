@@ -1,4 +1,4 @@
-function uninstall_colormap(
+function xcb_uninstall_colormap(
 	conn:: XCBConnection,
 	colormap:: Integer;
 	checked:: Bool

@@ -1,4 +1,4 @@
-function get_atom_name(
+function xcb_get_atom_name(
 	conn:: XCBConnection,
 	atom:: Integer;
 	checked:: Bool

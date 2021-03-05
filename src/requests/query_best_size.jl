@@ -1,4 +1,4 @@
-function query_best_size(
+function xcb_query_best_size(
 	conn:: XCBConnection,
 	class:: Integer,
 	drawable:: Integer,

@@ -1,4 +1,4 @@
-function poly_arc(
+function xcb_poly_arc(
 	conn:: XCBConnection,
 	drawable:: Integer,
 	gc:: Integer,

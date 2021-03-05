@@ -1,4 +1,4 @@
-function grab_key(
+function xcb_grab_key(
 	conn:: XCBConnection,
 	owner_events:: Bool,
 	grab_window:: Integer,

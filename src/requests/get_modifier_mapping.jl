@@ -1,4 +1,4 @@
-function get_modifier_mapping(
+function xcb_get_modifier_mapping(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBGetModifierMappingFuture

@@ -1,4 +1,4 @@
-function get_screen_saver(
+function xcb_get_screen_saver(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBGetScreenSaverFuture

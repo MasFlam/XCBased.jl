@@ -1,4 +1,4 @@
-function install_colormap(
+function xcb_install_colormap(
 	conn:: XCBConnection,
 	colormap:: Integer;
 	checked:: Bool

@@ -1,4 +1,4 @@
-function get_keyboard_control(
+function xcb_get_keyboard_control(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBGetKeyboardControlFuture

@@ -1,4 +1,4 @@
-function delete_property(
+function xcb_delete_property(
 	conn:: XCBConnection,
 	window:: Integer,
 	property:: Integer;

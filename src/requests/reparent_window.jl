@@ -1,4 +1,4 @@
-function reparent_window(
+function xcb_reparent_window(
 	conn:: XCBConnection,
 	window:: Integer,
 	parent:: Integer,

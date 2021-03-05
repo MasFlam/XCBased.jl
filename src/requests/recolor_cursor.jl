@@ -1,4 +1,4 @@
-function recolor_cursor(
+function xcb_recolor_cursor(
 	conn:: XCBConnection,
 	cursor:: Integer,
 	fore_red:: Integer,

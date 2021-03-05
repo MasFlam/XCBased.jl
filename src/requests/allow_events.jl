@@ -1,4 +1,4 @@
-function allow_events(
+function xcb_allow_events(
 	conn:: XCBConnection,
 	mode:: Integer,
 	time:: Integer;

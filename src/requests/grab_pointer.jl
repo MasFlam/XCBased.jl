@@ -1,4 +1,4 @@
-function grab_pointer(
+function xcb_grab_pointer(
 	conn:: XCBConnection,
 	owner_events:: Bool,
 	grab_window:: Integer,

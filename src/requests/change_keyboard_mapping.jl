@@ -1,4 +1,4 @@
-function change_keyboard_mapping(
+function xcb_change_keyboard_mapping(
 	conn:: XCBConnection,
 	keycode_count:: Integer,
 	first_keycode:: Integer,

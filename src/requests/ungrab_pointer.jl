@@ -1,4 +1,4 @@
-function ungrab_pointer(
+function xcb_ungrab_pointer(
 	conn:: XCBConnection,
 	time:: Integer;
 	checked:: Bool

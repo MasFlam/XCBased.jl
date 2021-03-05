@@ -1,4 +1,4 @@
-function get_property(
+function xcb_get_property(
 	conn:: XCBConnection,
 	delete:: Bool,
 	window:: Integer,

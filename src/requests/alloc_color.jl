@@ -1,4 +1,4 @@
-function alloc_color(
+function xcb_alloc_color(
 	conn:: XCBConnection,
 	colormap:: Integer,
 	red:: Integer,

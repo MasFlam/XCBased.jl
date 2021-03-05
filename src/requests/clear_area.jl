@@ -1,4 +1,4 @@
-function clear_area(
+function xcb_clear_area(
 	conn:: XCBConnection,
 	exposures:: Bool,
 	window:: Integer,

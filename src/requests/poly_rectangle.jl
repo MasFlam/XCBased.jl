@@ -1,4 +1,4 @@
-function poly_rectangle(
+function xcb_poly_rectangle(
 	conn:: XCBConnection,
 	drawable:: Integer,
 	gc:: Integer,

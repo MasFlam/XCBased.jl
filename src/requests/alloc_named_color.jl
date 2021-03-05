@@ -1,4 +1,4 @@
-function alloc_named_color(
+function xcb_alloc_named_color(
 	conn:: XCBConnection,
 	colormap:: Integer,
 	name:: AbstractString;

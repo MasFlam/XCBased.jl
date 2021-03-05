@@ -1,4 +1,4 @@
-function copy_plane(
+function xcb_copy_plane(
 	conn:: XCBConnection,
 	src_drawable:: Integer,
 	dst_drawable:: Integer,

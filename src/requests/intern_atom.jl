@@ -1,4 +1,4 @@
-function intern_atom(
+function xcb_intern_atom(
 	conn:: XCBConnection,
 	only_if_exists:: Bool,
 	name:: AbstractString;

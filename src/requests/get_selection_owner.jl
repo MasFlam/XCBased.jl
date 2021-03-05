@@ -1,4 +1,4 @@
-function get_selection_owner(
+function xcb_get_selection_owner(
 	conn:: XCBConnection,
 	selection:: Integer;
 	checked:: Bool

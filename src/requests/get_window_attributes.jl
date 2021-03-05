@@ -1,4 +1,4 @@
-function get_window_attributes(
+function xcb_get_window_attributes(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool

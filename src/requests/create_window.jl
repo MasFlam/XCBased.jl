@@ -1,4 +1,4 @@
-function create_window(
+function xcb_create_window(
 	conn:: XCBConnection,
 	depth:: Integer,
 	window:: Integer,

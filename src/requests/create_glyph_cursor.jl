@@ -1,4 +1,4 @@
-function create_glyph_cursor(
+function xcb_create_glyph_cursor(
 	conn:: XCBConnection,
 	cursor:: Integer,
 	source_font:: Integer,

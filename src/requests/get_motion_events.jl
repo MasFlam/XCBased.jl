@@ -1,4 +1,4 @@
-function get_motion_events(
+function xcb_get_motion_events(
 	conn:: XCBConnection,
 	window:: Integer,
 	start:: Integer,

@@ -1,4 +1,4 @@
-function ungrab_keyboard(
+function xcb_ungrab_keyboard(
 	conn:: XCBConnection,
 	time:: Integer;
 	checked:: Bool

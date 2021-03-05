@@ -1,4 +1,4 @@
-function unmap_subwindows(
+function xcb_unmap_subwindows(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool

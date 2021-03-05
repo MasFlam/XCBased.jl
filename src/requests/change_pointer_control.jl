@@ -1,4 +1,4 @@
-function change_pointer_control(
+function xcb_change_pointer_control(
 	conn:: XCBConnection,
 	acceleration_numerator:: Integer,
 	acceleration_denominator:: Integer,

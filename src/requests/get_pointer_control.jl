@@ -1,4 +1,4 @@
-function get_pointer_control(
+function xcb_get_pointer_control(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBGetPointerControlFuture

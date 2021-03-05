@@ -1,4 +1,4 @@
-function get_keyboard_mapping(
+function xcb_get_keyboard_mapping(
 	conn:: XCBConnection,
 	first_keycode:: Integer,
 	count:: Integer;

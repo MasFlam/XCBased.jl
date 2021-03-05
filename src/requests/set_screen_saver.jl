@@ -1,4 +1,4 @@
-function set_screen_saver(
+function xcb_set_screen_saver(
 	conn:: XCBConnection,
 	timeout:: Integer,
 	interval:: Integer,

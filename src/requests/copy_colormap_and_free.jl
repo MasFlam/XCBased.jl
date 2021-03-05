@@ -1,4 +1,4 @@
-function copy_colormap_and_free(
+function xcb_copy_colormap_and_free(
 	conn:: XCBConnection,
 	colormap:: Integer,
 	src_cmap:: Integer;

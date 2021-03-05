@@ -1,4 +1,4 @@
-function ungrab_key(
+function xcb_ungrab_key(
 	conn:: XCBConnection,
 	key:: Integer,
 	grab_window:: Integer,

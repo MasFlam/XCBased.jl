@@ -1,4 +1,4 @@
-function get_pointer_mapping(
+function xcb_get_pointer_mapping(
 	conn:: XCBConnection;
 	checked:: Bool
 ):: XCBGetPointerMappingFuture

@@ -1,4 +1,4 @@
-function configure_window(
+function xcb_configure_window(
 	conn:: XCBConnection,
 	window:: Integer;
 	checked:: Bool,

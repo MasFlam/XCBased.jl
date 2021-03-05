@@ -1,4 +1,4 @@
-function grab_button(
+function xcb_grab_button(
 	conn:: XCBConnection,
 	owner_events:: Bool,
 	grab_window:: Integer,

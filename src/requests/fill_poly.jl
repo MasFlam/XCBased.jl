@@ -1,4 +1,4 @@
-function fill_poly(
+function xcb_fill_poly(
 	conn:: XCBConnection,
 	drawable:: Integer,
 	gc:: Integer,

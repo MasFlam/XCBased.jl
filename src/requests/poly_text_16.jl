@@ -1,4 +1,4 @@
-function poly_text_16(
+function xcb_poly_text_16(
 	conn:: XCBConnection,
 	drawable:: Integer,
 	gc:: Integer,
