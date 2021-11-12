@@ -11,6 +11,10 @@ function XCBGetImageReply(replyptr:: Ptr{LibXCB.xcb_get_image_reply_t})
 		reply.sequence,
 		reply.depth,
 		reply.visual,
-		unsafe_wrap(Array, reply.data, reply.length)
+		unsafe_wrap(
+			Array,
+			LibXCB.xcb_get_image_data(replyptr),
+			LibXCB.xcb_get_image_data_length(replyptr)
+		)
 	)
 end

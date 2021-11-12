@@ -8,7 +8,7 @@ end
 
 function XCBClientMessageEvent(evptr:: Ptr{LibXCB.xcb_generic_event_t})
 	ev = unsafe_load(Ptr{LibXCB.xcb_client_message_event_t}(evptr))
-	data = UInt8[ev.data...]
+	data = UInt8[ev.data.data8...]
 	XCBClientMessageEvent(
 		ev.sequence,
 		ev.format,
