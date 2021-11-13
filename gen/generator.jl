@@ -9,9 +9,9 @@ libxcb_headers = joinpath.(Ref(libxcb_include_dir), ["xcb.h", "xproto.h", "xkb.h
 function header_library(header)
 	header = basename(header)
 	if header in ("xcb.h", "xproto.h")
-		return Xorg_libxcb_jll.libxcb
+		return "libxcb"
 	elseif header == "xkb.h"
-		return Xorg_libxcb_jll.libxcb_xkb
+		return "libxcb_xkb"
 	end
 	error("unknown header: $header")
 end
